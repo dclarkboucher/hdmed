@@ -421,15 +421,10 @@ mediation_net_ADMM_NC_VSS<-function(data1,data2,zero.cutoff=1e-3,
 
   #######################################################
   # active sets
-  # print("str(rel1$AB)")
-  # print(str(re1$AB))
-  # print("str(rel1$AB)")
-  # print(str(re2$AB))
+
   AB.est<-cbind(re1$AB,re2$AB)
-  # print(head(AB.est))
   colnames(AB.est)<-c("data1","data2")
-  # print("Summaries")
-  # print(str(zero.cutoff))
+
   S1<-as.numeric(abs(as.vector(re1$AB))>zero.cutoff)#; print(summary(S1))
   S2<-as.numeric(abs(as.vector(re2$AB))>zero.cutoff)#; print(summary(S2))
   ac.set<-cbind(S1,S2)

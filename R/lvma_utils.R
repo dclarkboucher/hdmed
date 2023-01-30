@@ -74,6 +74,7 @@ process_lvma <- function (out, type = c("EBIC", "BIC", "AIC"), M, rhoLM, rhoEL, 
   return(output)
 }
 
+tr <- function(x) sum(diag(x))
 
 
 # Functions for LVMA - continuous -----------------------------------------

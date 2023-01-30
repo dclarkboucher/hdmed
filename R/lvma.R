@@ -22,8 +22,6 @@
 #' short toy sequence.
 #' @param imax integer specifying the maximum number of iterations allowed. Default is 5000.
 #'
-#'
-#'
 #' @details
 #' LVMA is a latent variable mediation model which assumes, contrary to standard
 #' assumptions, that the inputted set of candidate mediators do not
@@ -59,8 +57,6 @@
 #' mediators are those which are associated with a latent mediator that itself
 #' is associated with both A and Y.
 #'
-#'
-#' @import psych
 #'
 #'
 #' @references

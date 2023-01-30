@@ -83,7 +83,7 @@ adlasso <- function(X, Y, nlambda = 100, nlambda2 = 50, nfolds = 5){
   #Step 3: Process results
   coefs1 <- gcdnet::coef(mod2, s = "lambda.min")[,1]
   if(all(coefs1[-1]==0)) return(get_blank(X))
-  y_preds <- predict(mod2, X1, s = "lambda.min")
+  y_preds <- gcdnet::predict(mod2, X1, s = "lambda.min")
   s2 <- crossprod(Y - y_preds) / (n - sum(coefs1!=0) - 1)
   X2 <- X1[, which(coefs1[-1] != 0)]
   variance <- solve(crossprod(X2))*c(s2)

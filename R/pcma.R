@@ -48,7 +48,6 @@
 #'
 #' @import MASS
 #' @import Matrix
-#' @import mvtnorm
 #' @import sandwich
 #' @import mediation
 #'

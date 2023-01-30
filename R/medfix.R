@@ -27,8 +27,6 @@
 #' @param seed numeric random seed.
 #'
 #'
-#' @import gcdnet
-#'
 #' @details
 #' MedFix performs mediation analysis when there are multiple mediators by
 #' applying adaptive LASSO to the outcome model. In order to fit the adaptive LASSO,
@@ -46,6 +44,9 @@
 #' case that there is only one exposure; for details on how to apply
 #' MedFix when the exposures are high-dimensional, as proposed by the
 #' authors, see the supplemental files of the referenced manuscript.
+#'
+#'
+#' @import gcdnet
 #'
 #'
 #' @return A list containing:
@@ -67,6 +68,8 @@
 #' Y <- med_dat$Y
 #'
 #' out <- mediate_medfix(A, M, Y, nlambda = 10, nlambda2 = 5, seed = 1)
+#' out$effects
+#' head(out$contributions)
 #'
 #' @export
 #'

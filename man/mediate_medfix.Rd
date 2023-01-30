@@ -85,6 +85,8 @@ M <- med_dat$M
 Y <- med_dat$Y
 
 out <- mediate_medfix(A, M, Y, nlambda = 10, nlambda2 = 5, seed = 1)
+out$effects
+head(out$contributions)
 
 }
 \references{

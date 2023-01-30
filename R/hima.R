@@ -74,13 +74,13 @@
 #'
 #' # Fit hima with continuous outcome
 #' out <- mediate_hima(A, M, Y)
-#' head(out$contributions)
+#' utils::head(out$contributions)
 #' out$effects
 #'
 #' # Fit hima with binary outcome
 #' Y1 <- as.numeric(Y > mean(Y))
 #' out1 <- mediate_hima(A, M, Y1, binary_y = T)
-#' head(out1$contributions)
+#' utils::head(out1$contributions)
 #' out1$effects
 #'
 #' @export

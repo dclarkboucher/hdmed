@@ -78,7 +78,7 @@ Y <- med_dat$Y
 
 # Fit hdma with continuous outcomes
 out <- mediate_hdma(A, M, Y)
-head(out$contributions)
+utils::head(out$contributions)
 out$effects
 
 }

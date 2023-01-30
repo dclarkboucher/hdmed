@@ -96,7 +96,7 @@ Y <- med_dat$Y
 # Toy example with small burnin and ndraws
 out <- mediate_bslmm(A, M, Y, burnin = 100, ndraws = 10)
 out$effects
-head(out$contributions)
+utils::head(out$contributions)
 
 
 }
