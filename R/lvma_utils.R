@@ -14,7 +14,6 @@ lvma <- function (A, M, Y, q, rhoL, rhoE, rhoY, imax) {
       MR <- apply(M, 2, function(x) lm(x ~ A)$residuals)
       aa = prcomp(MR, scale = TRUE, center = TRUE)
       Loadings = varimax(aa$rotation[, 1:q])$loadings
-
       out <-
         run_LVMA_Cont(
           Obs_Data = Obs_Data,
@@ -35,9 +34,7 @@ process_lvma <- function (out, type = c("EBIC", "BIC", "AIC"), M, rhoLM, rhoEL, 
   value <- out[[paste0("val_", type)]]
 
   # Which tuning parameters were chosen?
-  which_chosen <- out[[paste0("model_selection",type)]]
-  penalty <- c(rhoLM[which_chosen[1]], rhoEL[which_chosen[2]],
-               rhoLY[which_chosen[3]])
+  penalty <- out[[paste0("model_selection",type)]]
   names(penalty) <- c("rhoLM", "rhoEL", "rhoLY")
 
   # What are the estimated effects?
@@ -69,7 +66,7 @@ process_lvma <- function (out, type = c("EBIC", "BIC", "AIC"), M, rhoLM, rhoEL, 
       LM_effects = as.data.frame(LM_effects),
       AY_direct_effect = AY_direct_effect,
       LY_effects = LY_effects,
-      mediator_active
+      mediator_active = mediator_active
     )
 
   output[[type]] <- value

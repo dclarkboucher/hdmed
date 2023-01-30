@@ -21,13 +21,6 @@
 #' the mediator model p-values.
 #' @param ... other arguments passed to [hdi::hdi()].
 #'
-#' @return A list containing:
-#' \itemize{
-#'     \item{contributions: }{a data frame containing the estimates and p-values
-#'     of the mediation contributions}
-#'     \item{effects: }{a data frame containing the estimated direct, global
-#'     mediation, and total effects}
-#' }
 #'
 #' @details The first step in HDMA is to perform sure independence
 #' screening (SIS) to choose the \code{n_include} mediators that are most
@@ -38,13 +31,20 @@
 #' computation of p-values by the \code{hdi} package. HDMA then fits the
 #' mediator models using linear regression among those mediators that have both
 #' survived SIS (in step 1) and been identified by the LASSO (in step 2), obtaining
-#' p-values for the mediation contributions by taking the maximum of the alpha
-#' and beta p-values. The global indirect effect is estimated by summing the
+#' p-values for the mediation contributions by taking the maximum of the \eqn{\alpha_a}
+#' and \eqn{\beta_m} p-values. The global indirect effect is estimated by summing the
 #' mediation contributions, and the direct effect is estimated by subtracting
 #' the global indirect effect from an estimate of the total effect. See References for
 #' more detail.
 #'
-#' @export
+#' @return A list containing:
+#' \itemize{
+#'     \item{contributions: }{a data frame containing the estimates and p-values
+#'     of the mediation contributions}
+#'     \item{effects: }{a data frame containing the estimated direct, global
+#'     mediation, and total effects}
+#' }
+#'
 #'
 #' @import glmnet
 #' @import stats
@@ -63,8 +63,20 @@
 #' Fan, J. & Lv, J. Sure independence screening for ultrahigh dimensional
 #' feature space. J. R. Stat. Soc. 70, 849–911 (2008).
 #'
-#'
 #' @examples
+#' data("med_dat")
+#' A <- med_dat$A
+#' M <- med_dat$M
+#' Y <- med_dat$Y
+#'
+#' # Fit hdma with continuous outcomes
+#' out <- mediate_hdma(A, M, Y)
+#' head(out$contributions)
+#' out$effects
+#'
+#' @export
+#'
+
 mediate_hdma <- function(A, M, Y, C1 = NULL, C2 = NULL, binary_y = F,
                          n_include = NULL,
                          ...){

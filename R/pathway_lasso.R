@@ -20,18 +20,9 @@
 #' @param omega_ratio ratio of the \code{omega} parameter to \code{lambda}
 #' parameter in the likelihood penalty. Default is 1.
 #' @param phi value of the \code{phi} parameter in the likelihood penalty.
-#' Default is 2.
+#' Default is 2. Cannot be less than 1/2.
 #' @param maxit the maximum number of iterations. Default is 5000.
 #' @param tol convergence tolerance. Default is 10^-6.
-#'
-#' @return A list containing:
-#' \itemize{
-#'     \item{lambdas: }{the \code{lambda}s attempted in the same order as the objects in \code{all_fits}.}
-#'     \item{all_fits: }{a list containing, for each \code{lambda}, a \code{data.frame} of the estimated mediation effects.}
-#'     \item{chosen_lambda: }{if \code{select_lambda} is \code{TRUE}, the \code{lambda} chosen by VSSC.}
-#'     \item{chosen_fit: }{if \code{select_lambda} is \code{TRUE}, the fit corresponding to the chosen \code{lambda}.}
-#'     \item{vss: }{if \code{select_lambda} is\code{TRUE}, a \code{data.frame} containing the variable selection stabilities.}
-#' }
 #'
 #'
 #' @details
@@ -54,6 +45,15 @@
 #' long list of tuning parameters, since it involves re-fitting pathway LASSO
 #' many times.
 #'
+#' @return A list containing:
+#' \itemize{
+#'     \item{lambdas: }{the \code{lambda}s attempted in the same order as the objects in \code{all_fits}.}
+#'     \item{all_fits: }{a list containing, for each \code{lambda}, a \code{data.frame} of the estimated mediation effects.}
+#'     \item{chosen_lambda: }{if \code{select_lambda} is \code{TRUE}, the \code{lambda} chosen by VSSC.}
+#'     \item{chosen_fit: }{if \code{select_lambda} is \code{TRUE}, the fit corresponding to the chosen \code{lambda}.}
+#'     \item{vss: }{if \code{select_lambda} is\code{TRUE}, a \code{data.frame} containing the variable selection stabilities.}
+#' }
+#'
 #'
 #' @import MASS
 #' @import mediation
@@ -64,6 +64,16 @@
 #'
 #' Sun, W., Wang, J. & Fang, Y. Consistent selection of tuning parameters via
 #' variable selection stability. J. Mach. Learn. Res. 14, 3419–3440 (2013).
+#'
+#' @examples
+#' data("med_dat")
+#' A <- med_dat$A
+#' M <- med_dat$M
+#' Y <- med_dat$Y
+#' # fit pathway LASSO for two tuning parameters and retrieve their fits
+#' out <- mediate_plasso(A, M, Y, lambdas = c(10^-3, 10^-2))
+#' head(out$all_fits$lambda1)
+#' head(out$all_fits$lambda2)
 #'
 #'
 #' @export
@@ -106,9 +116,9 @@ mediate_plasso <- function(A, M, Y, lambdas = NULL, select_lambda = F,
   sd.M <- apply(M, 2, sd)
   sd.R <- sd(R)
 
-  Z <- as.numeric(scale(Z))
-  M <- as.matrix(scale(M))
-  R <- as.numeric(scale(R))
+  Z <- scale(Z)
+  M <- scale(M)
+  R <- scale(R)
   dd <- data.frame(Z=Z, M, R=R)
 
   # Lambda
@@ -138,10 +148,10 @@ mediate_plasso <- function(A, M, Y, lambdas = NULL, select_lambda = F,
   zero.cutoff <- 1e-3
 
   # Empty result objects
-  AB.est  <- matrix(NA, k, length(lambda))
+  AB.est  <- matrix(NA, k, length(lambdas))
   A.est <- AB.est
   B.est <- AB.est
-  C.est <- rep(NA, length(lambda))
+  C.est <- rep(NA, length(lambdas))
   fit_succeeded <- c()
 
   message("Fitting pathway LASSO...")
@@ -185,16 +195,12 @@ mediate_plasso <- function(A, M, Y, lambdas = NULL, select_lambda = F,
     fit_succeeded <- append(fit_succeeded, succeeded)
 
     if(succeeded){
+
       B.est[, i] <- out$B * (sd.R / sd.M)
       C.est[i] <- out$C * (sd.R / sd.Z)
       A.est[, i] <- out$A * (sd.M / sd.Z)
       AB.est[, i] <- A.est[, i] * B.est[, i]
 
-    }else{
-      B.est[, i] <- NA
-      C.est[i] <- NA
-      A.est[, i] <- NA
-      AB.est[, i] <- NA
     }
 
   }
@@ -206,10 +212,10 @@ mediate_plasso <- function(A, M, Y, lambdas = NULL, select_lambda = F,
     return(NULL)
   }
 
-  result_list <- ls()
+  result_list <- c()
   lambdas1 <- lambdas[fit_succeeded] # Succeeded lambdas
-  A.est <- A.est[, fit_succeeded]
-  B.est <- B.est[, fit_succeeded]
+  A.est <- as.matrix(A.est[, fit_succeeded])
+  B.est <- as.matrix(B.est[, fit_succeeded])
   AB.est <- A.est * B.est
   C.est <- C.est[fit_succeeded]
 
@@ -224,7 +230,8 @@ mediate_plasso <- function(A, M, Y, lambdas = NULL, select_lambda = F,
         alpha_beta =  AB.est[, i],
         direct_effect = C.est[i],
         global_indirect_effect = sum(AB.est[, i]),
-        total_effect = sum(AB.est[, i]) + C.est[i]
+        total_effect = sum(AB.est[, i]) + C.est[i],
+        row.names = NULL
       )
   }
 
@@ -265,11 +272,12 @@ mediate_plasso <- function(A, M, Y, lambdas = NULL, select_lambda = F,
       lambda = lambdas1,
       mean_vss = vss_results$vss,
       meets_cutoff = (1:nlambda) %in% which_suggested_lambdas,
-      chosen = lambdas1 == chosen_lambda #minimum lambda meeting threshold is chosen
+      chosen = lambdas1 == chosen_lambda, #minimum lambda meeting threshold is chosen
+      row.names = NULL
     )
 
   output$chosen_lambda = lambdas1[which_chosen]
-  output$chosen_fit = results[[which_chosen]]
+  output$chosen_fit = result_list[[which_chosen]]
   output$vss = vss_out
 
   return(output)

@@ -121,8 +121,7 @@ R2.flasso <- #Fixed!
       out.tmp<-fusedlasso1d(y=E.pc[,1],X=E,gamma=gamma,eps=eps,maxsteps=maxsteps)
     }else
     {
-      #out.tmp<-fusedlasso(y=E.pc[,1],X=E,D=D,gamma=gamma,eps=eps,maxsteps=maxsteps)
-      out.tmp<-genlasso(y=E.pc[,1],X=E,D=D,gamma=gamma,eps=eps,maxsteps=maxsteps)
+      out.tmp<-genlasso(y=E.pc[,1],X=E,D=D,eps=eps,maxsteps=maxsteps)
     }
     var.per.tmp<-rep(NA,length(out.tmp$lambda))
     for(k in 1:length(out.tmp$lambda))
@@ -152,7 +151,7 @@ R2.flasso <- #Fixed!
       }else
       {
         #out.tmp<-fusedlasso(y=Etmp[,j],X=E,D=D,gamma=gamma,eps=eps,maxsteps=maxsteps)
-        out.tmp<-genlasso(y=Etmp[,j],X=E,D=D,gamma=gamma,eps=eps,maxsteps=maxsteps)
+        out.tmp<-genlasso(y=Etmp[,j],X=E,D=D,eps=eps,maxsteps=maxsteps)
       }
 
       var.per.tmp=var.per.tol.tmp<-rep(NA,length(out.tmp$lambda))
@@ -173,7 +172,7 @@ R2.flasso <- #Fixed!
     return(re)
   }
 
-mediate_multiple <- #Fixed!
+mediate_multiple <-
   function(X, M, Y, sims = 1000, boot.ci.type = c("bca", "perc"),
            conf.level = 0.95)
   {
@@ -211,7 +210,7 @@ mediate_multiple <- #Fixed!
         c(coef(fit.m)[2],
           summary(fit.m)$coefficients[2,2],
           summary(fit.m)$coefficients[2,4],
-          confint(fit.m,level=conf.level)[2,],
+          confint(fit.m,level=conf.level)[2,]
         )
 
       beta[j, 1:5] <-
@@ -222,9 +221,11 @@ mediate_multiple <- #Fixed!
         )
 
       set.seed(123) #using the same seed for each makes the sims more comparable
-      re.med <- mediate(fit.m, fit.y, treat = "X", mediator = "M", sims = sims,
+      re.med <-
+        suppressMessages(
+        mediate(fit.m, fit.y, treat = "X", mediator = "M", sims = sims,
                         boot = T, boot.ci.type = boot.ci.type[1],
-                        conf.level = conf.level)
+                        conf.level = conf.level))
 
       IE[j, 1:5] <- c(re.med$d1, sd(re.med$d1.sims), re.med$d1.p, re.med$d1.ci)
       beta_a[j, 1:5] <- c(re.med$z1, sd(re.med$z1.sims), re.med$z1.p, re.med$z1.ci)
@@ -236,16 +237,20 @@ mediate_multiple <- #Fixed!
     }
 
     #Organize sims
-    TE.sims <- rowMeans(TE.sims)
-    IE.total.sims <- rowSums(IE.sims)
+    TE.sims <- rowMeans(TE.sims, na.rm = T)
+    IE.total.sims <- rowSums(IE.sims, na.rm = T)
     DE.sims <- TE.sims - IE.total.sims
 
     #Total effects
     TE <- matrix(NA,1,5)
     colnames(TE) <- coln
-    TE[1,1] <- mean(TE.est) #should all be the same anyways, because seed is set
+
+
+    #Taking the mean here is fine because the seed is set, so the estimates
+    #should always be the same
+    TE[1,1] <- mean(TE.est, na.rm = T)
     TE[1,2] <- sd(TE.sims)
-    TE[1,3] <- mean(TE.pv)
+    TE[1,3] <- mean(TE.pv, na.rm = T)
 
     #Global indirect effect
     IE.total <- TE

@@ -169,12 +169,15 @@ medfix <- function(A, M, Y, C1, C2, nlambda = 100, nlambda2 = 50,
   ma_out <- as.data.frame(do.call(rbind, ma_out))
   colnames(ma_out) <- c("alpha","alpha_pv")
 
+  message("Done!")
   #Summarize output
   out <-
     data.frame(
       mediator = ym_out$mediator,
       beta = ym_out$beta * sd_Yr / sd_Mr,
+      beta_pv = ym_out$beta_pv,
       alpha = ma_out$alpha,
+      alpha_pv = ma_out$alpha_pv,
       alpha_beta = ma_out$alpha * ym_out$beta * sd_Yr / sd_Mr,
       ab_pv = pmax(ym_out$beta_pv,ma_out$alpha_pv),
       te = summary(lm(Y ~ ., data = AC1))$coefficients[2,1],

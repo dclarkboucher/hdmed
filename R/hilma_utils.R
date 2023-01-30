@@ -1,7 +1,7 @@
 extract_hilma <- function(k, hilma_out){
 
   effects <- matrix(NA, 3, 3)
-  colnames(effects) <- c("effect","estimate","pvalue")
+  colnames(effects) <- c("effect","estimate","pv")
 
   effects[, 1] <- c("indirect","direct","total")
   effects[1, 2] <- hilma_out$beta_hat[k, 1]

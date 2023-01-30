@@ -24,14 +24,8 @@
 #' the \code{lambda2} with the least cross-validated error is chosen.
 #' @param nfolds number of folds for cross-validation. See [gcdnet::cv.gcdnet()].
 #' Default is \code{10}.
+#' @param seed numeric random seed.
 #'
-#' @return A list containing:
-#' \itemize{
-#'     \item{contributions: }{a data frame containing the estimates and p-values
-#'     of the mediation contributions}
-#'     \item{effects: }{a data frame containing the estimated direct, global
-#'     mediation, and total effects}
-#' }
 #'
 #' @import gcdnet
 #'
@@ -41,30 +35,49 @@
 #' we first obtain an initial model fit using either LASSO (which deploys
 #' the L1 penalty) or elastic net (which deploys both the L1 and L2 penalties)
 #' depending on the provided \code{nlambda2}. Estimates from this fit are then used
-#' to compute the adaptive weights used by adaptive LASSO. Once the final
-#' adaptive LASSO estimates (betas) are obtained for the outcome model, estimates for
-#' the \code{p} mediator models (alphas) are obtained by linear regression. The
-#' mediation contributions are computed as alpha times beta, and the p-value
-#' is taken as the maximum of the alpha and beta p-values. Last, the global indirect
-#' effect is estimated by summing the mediation contributions, and the direct
+#' to compute the adaptive weights used in the adaptive LASSO. Once the final
+#' adaptive LASSO estimates (\eqn{\beta_m}) are obtained for the outcome model, estimates for
+#' the \code{p} mediator models (\eqn{\alpha_a}) are obtained by linear regression. The
+#' mediation contributions are computed as \eqn{\alpha_a} times \eqn{\beta_m}, and the p-value
+#' is taken as the maximum of the \eqn{\alpha_a} and \eqn{beta_m} p-values. Last, the
+#' global indirect effect is estimated by summing the mediation contributions, and the direct
 #' effect is estimated by subtracting the global indirect effect from an estimate of
 #' the total effect. This function is specific to applying MedFix to the special
-#' case that there is only one exposure variable; for details on how to apply
+#' case that there is only one exposure; for details on how to apply
 #' MedFix when the exposures are high-dimensional, as proposed by the
-#' authors, see the supplemental files of the original manuscript.
+#' authors, see the supplemental files of the referenced manuscript.
 #'
 #'
+#' @return A list containing:
+#' \itemize{
+#'     \item{contributions: }{a data frame containing the estimates and p-values
+#'     of the mediation contributions}
+#'     \item{effects: }{a data frame containing the estimated direct, global
+#'     mediation, and total effects}
+#' }
 #'
+#' @references
+#' Zhang, Q. High-Dimensional Mediation Analysis with Applications to Causal
+#' Gene Identification. Statistics in biosciences (2021)
+#'
+#' @examples
+#' data("med_dat")
+#' A <- med_dat$Y
+#' M <- med_dat$M
+#' Y <- med_dat$Y
+#'
+#' out <- mediate_medfix(A, M, Y, nlambda = 10, nlambda2 = 5, seed = 1)
 #'
 #' @export
 #'
-#' @examples
 
 mediate_medfix <- function(A, M, Y, C1 = NULL, C2 = C1,
-                           nlambda = 100, nlambda2 = 50, nfolds = 10){
+                           nlambda = 100, nlambda2 = 50, nfolds = 10,
+                           seed = 1){
 
   n <- nrow(M)
   p <- ncol(M)
+  set.seed(seed)
 
   #Check A, M, Y
   if(is.data.frame(M)) M <- as.matrix(M)
@@ -97,7 +110,7 @@ mediate_medfix <- function(A, M, Y, C1 = NULL, C2 = C1,
   #Organize effects
   te <- med_out$te[1]
   gie <- sum(med_out$alpha_beta)
-  de <- te - de
+  de <- te - gie
   effects <-
     data.frame(
       effect = c("indirect", "direct", "total"),

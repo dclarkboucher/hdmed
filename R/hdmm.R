@@ -1,12 +1,13 @@
 #' High-dimensional Multivariate Mediation Analysis with
 #' Principal Directions of Mediation
 #'
-#' \code{hdmm} estimates the first  "direction of mediation" in the
+#' \code{mediate_hdmm} estimates the first  "direction of mediation" in the
 #' causal mediation mechanism of an exposure \code{A}, an outcome \code{Y}, and high-dimensional
 #' mediators \code{M} as proposed by Chén et al. (2018).
 #'
 #' @param A numeric vector containing exposure variable.
-#' @param M numeric matrix of high-dimensional mediators.
+#' @param M numeric matrix of high-dimensional mediators. It is not recommended
+#' to supply a matrix with more mediators than observations.
 #' @param Y numeric vector containing continuous outcome variable.
 #' @param sims number of Monte Carlo draws for nonparametric bootstrap or
 #' quasi-Bayesian approximation. See \code{\link{mediate}}. Default is 1000.
@@ -27,6 +28,18 @@
 #' search. Default is 10^4.
 #' @param imax integer specifying the maximum number of iterations allowed.
 #' Default is 100.
+#'
+#' @details
+#' HDMM provides latent variable approach to high-dimensional mediation analysis.
+#' The function \code{mediate_hdmm} uses a likelihood-based approach to compute
+#' principal directions of mediation (PDMs), which are loading weights used to linearly
+#' combine the inputted mediators to form a single, latent variable that replaces
+#' the original mediators in the analysis. Though HDMM cannot be used to estimate
+#' the global mediation effect or the contributions of specific mediators, it can
+#' still can be useful for inferring whether there is mediation occurring through
+#' the set of mediators as a joint system. See the provided reference for more
+#' details.
+#'
 #'
 #' @return A list containing:
 #' \itemize{
@@ -52,14 +65,18 @@
 #'
 #' @examples
 
-hdmm <- function(A, M, Y, sims = 1000, boot_ci_type = "bca",
+mediate_hdmm <- function(A, M, Y, sims = 1000, boot_ci_type = "bca",
                  ci_level = 0.95, tol = 10^-5, theta = rep(1,5),
-                 w1 = rep(1,nrow(A)), interval = 10^6, step = 10^4,
+                 w1 = rep(1,ncol(M)), interval = 10^6, step = 10^4,
                  imax = 100){
 
+
+
+
   #Obtain first PDM and corresponding latent mediator
-  pdm1 <- as.vector(PDM_1(A,Y,M,imax,tol,theta,w1,interval,step)$w1)
-  m <- M %*% as.matrix(pdm1, ncol = 1) #latent mediator
+  pdm1 <- as.vector(PDM_1(A, Y, M, imax, tol, theta, w1, interval, step)$w1)
+  m <- as.vector(M %*% as.matrix(pdm1, ncol = 1)) #latent mediator
+
 
   #Fit mediation models
   fit.total <- lm(Y ~ A)
@@ -68,14 +85,15 @@ hdmm <- function(A, M, Y, sims = 1000, boot_ci_type = "bca",
 
   #Mediation analysis
   med <-
+    suppressMessages(
     mediate(fit.m, fit.y, treat = "A", mediator = "m", sims = sims, boot = T,
-            boot.ci.type = boot_ci_type, conf.level = ci_level)
+            boot.ci.type = boot_ci_type, conf.level = ci_level))
 
   #Create empty results table
   results <- matrix(NA, nrow = 3, ncol = 6)
-  percentiles <- round(c((1 - conf.level) /2, 1 - (1 - conf.level) / 2) * 100,1)
+  percentiles <- round(c((1 - ci_level) /2, 1 - (1 - ci_level) / 2) * 100,1)
   ci_names <-  paste0("cl_", percentiles,"%")
-  colnames(results) <- c("effect","estimate","se",ci_names,"pvalue")
+  colnames(results) <- c("effect","estimate","se",ci_names,"pv")
 
   #Fill in results
   results[1:3, 1] <- c("indirect","direct","total")

@@ -21,13 +21,6 @@
 #' the mediator model p-values.
 #' @param ... other arguments passed to \code{\link{hdi}}.
 #'
-#' @return A list containing:
-#' \itemize{
-#'     \item{contributions: }{a data frame containing the estimates and p-values
-#'     of the mediation contributions}
-#'     \item{effects: }{a data frame containing the estimated direct, global
-#'     mediation, and total effects}
-#' }
 #'
 #' @details The first step in HIMA is to perform sure independence
 #' screening (SIS) to choose the \code{n_include} mediators that are most
@@ -40,8 +33,8 @@
 #' contributions. The global indirect effect is estimated by summing these
 #' contributions, and the direct effect is estimated by subtracting the global
 #' indirect effect from an estimate of the total effect. We compute p-values for
-#' the mediation contributions by taking the maximum of the alpha and beta p-values,
-#' where the beta p-values are obtained via a second, unpenalized generalized
+#' the mediation contributions by taking the maximum of the \eqn{\alpha_a} and \eqn{\beta_m}
+#' p-values, where the beta p-values are obtained via a second, unpenalized generalized
 #' linear model containing only the mediators selected by the MCP. We include this
 #' p-value computation so that our function replicates the behavior of [HIMA::hima()],
 #' the function on which ours is based, but we caution that the beta p-values
@@ -49,11 +42,16 @@
 #' the unpenalized model are only those chosen by the penalized model. Note also
 #' that the HIMA authors apply Bonferroni correction to the final, maxed p-values
 #' to account for multiple testing, which we choose to leave up to the user. For
-#' more information, see the R package \code{link{HIMA}} along with the provided
+#' more information, see the R package \code{\link{HIMA}} along with the provided
 #' reference.
 #'
-#'
-#' @export
+#' @return A list containing:
+#' \itemize{
+#'     \item{contributions: }{a data frame containing the estimates and p-values
+#'     of the mediation contributions}
+#'     \item{effects: }{a data frame containing the estimated direct, global
+#'     mediation, and total effects}
+#' }
 #'
 #'
 #' @import glmnet
@@ -68,10 +66,24 @@
 #' Zhang, H. et al. Estimating and testing high-dimensional mediation effects
 #' in epigenetic studies. Bioinformatics 32, 3150–3154 (2016).
 #'
-#'
 #' @examples
+#' data("med_dat")
+#' A <- med_dat$A
+#' M <- med_dat$M
+#' Y <- med_dat$Y
 #'
+#' # Fit hima with continuous outcome
+#' out <- mediate_hima(A, M, Y)
+#' head(out$contributions)
+#' out$effects
 #'
+#' # Fit hima with binary outcome
+#' Y1 <- as.numeric(Y > mean(Y))
+#' out1 <- mediate_hima(A, M, Y1, binary_y = T)
+#' head(out1$contributions)
+#' out1$effects
+#'
+#' @export
 #'
 #'
 #'

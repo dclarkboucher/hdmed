@@ -6,6 +6,7 @@ mediation_net_ll<-function(Z,M,R,A,B,C,Sigma)
   n<-nrow(M)
   k<-ncol(M)
 
+
   Sigma1<-matrix(Sigma[1:k,1:k],k,k)
   Sigma2<-matrix(Sigma[(k+1),(k+1)],1,1)
 
@@ -18,6 +19,8 @@ mediation_net_ll<-function(Z,M,R,A,B,C,Sigma)
   {
     l3<--sum(diag(diag(1/diag(Sigma1))%*%t(M-Z%*%A)%*%(M-Z%*%A)))/2
   }
+
+
   l4<--(t(R-Z%*%C-M%*%B)%*%(R-Z%*%C-M%*%B))[1,1]/(2*Sigma2[1,1])
   const.MR<-log(2*pi)*(-(n*(k+1))/2)
   l.MR<-l1+l2+l3+l4+const.MR
@@ -543,4 +546,37 @@ mediation_net_ADMM_NC_KSC<-function(Z,M,R,zero.cutoff=1e-3,n.rep=5,vss.cut=0.1,
 
   re<-list(vss.mat=vss,vss=vss.est,lambda.idx=lambda.idx,lambda.est=lambda.est)
   return(re)
+}
+
+cohen.kappa<-function(S1,S2)
+{
+  if(length(S1)!=length(S2))
+  {
+    stop("Cardinality of two sets are different!")
+  }else
+  {
+    p<-length(S1)
+
+    n11<-length(which(S1==1&S2==1))
+    n12<-length(which(S1==1&S2==0))
+    n21<-length(which(S1==0&S2==1))
+    n22<-length(which(S1==0&S2==0))
+
+    re.table<-matrix(c(n11,n21,n12,n22),2,2)
+    colnames(re.table)<-paste0("S2_",c("1","0"))
+    rownames(re.table)<-paste0("S1_",c("1","0"))
+
+    if(n11==p|n22==p)
+    {
+      kp<--1
+    }else
+    {
+      pa<-(n11+n22)/p
+      pe<-(n11+n12)*(n11+n21)/p^2+(n12+n22)*(n21+n22)/p^2
+
+      kp<-(pa-pe)/(1-pe)
+    }
+
+    return(list(table=re.table,kappa=kp))
+  }
 }

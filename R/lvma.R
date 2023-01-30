@@ -22,16 +22,6 @@
 #' short toy sequence.
 #' @param imax integer specifying the maximum number of iterations allowed. Default is 5000.
 #'
-#' @return A list containing the selected models based on AIC, BIC, and EBIC
-#' (recommended) as three sub-lists. The sub-lists include objects indicating
-#' the penalty set that was used (\code{penalty}), the values of the chosen parameters
-#' (e.g., \code{EBIC}), the exposure-latent mediator effects (\code{AL_effects}),
-#' the latent mediator-mediator effects (\code{LM_effects}, a data frame), the
-#' direct effect of the exposure on the outcome (\code{AY_direct_effect}), the
-#' the latent mediator-outcome effects (\code{LY_effects}), and binary vector
-#' indicating whether each mediator was determined to be active. Here, active
-#' mediators are those which are associated with a latent mediator that itself
-#' is associated with both A and Y.
 #'
 #'
 #' @details
@@ -41,7 +31,7 @@
 #' of latent, unmeasured mediators which themselves transmit effects from the
 #' exposure to outcome. The required parameters for fitting this model are
 #' \code{rhoLE}, a regularization parameter for effects of the latent mediators
-#' on the inputted \code{M}; \code{rhoEL}, a regularization parameter for the
+#' on the inputted mediators; \code{rhoEL}, a regularization parameter for the
 #' effects of the exposure on the latent mediators; and \code{rhoLY}, a
 #' regularization parameter for the effects of the latent mediators on the
 #' exposure. These parameters should ideally be supplied by the user as
@@ -58,6 +48,17 @@
 #' parameters, and mediation model, see the referenced article and/or its
 #' supplement files.
 #'
+#' @return A list containing the selected models based on AIC, BIC, and EBIC
+#' (recommended) as three sub-lists. The sub-lists include objects indicating
+#' the penalty set that was used (\code{penalty}), the values of the chosen parameters
+#' (e.g., \code{EBIC}), the exposure-latent mediator effects (\code{AL_effects}),
+#' the latent mediator-mediator effects (\code{LM_effects}, a data frame), the
+#' direct effect of the exposure on the outcome (\code{AY_direct_effect}), the
+#' the latent mediator-outcome effects (\code{LY_effects}), and binary vector
+#' indicating whether each mediator was determined to be active. Here, active
+#' mediators are those which are associated with a latent mediator that itself
+#' is associated with both A and Y.
+#'
 #'
 #' @import psych
 #'
@@ -66,10 +67,22 @@
 #' Derkach, A., Pfeiffer, R. M., Chen, T.-H. & Sampson, J. N. High dimensional
 #' mediation analysis with latent variables. Biometrics 75, 745–756 (2019).
 #'
-#' @export
 #'
 #' @examples
-mediate_lvma <- function(A, M, Y, q, rho, scale = T, imax = 5000){
+#' data("med_out")
+#' A <- med_dat$A
+#' M <- med_dat$M
+#' Y <- med_dat$Y
+#'
+#' # Perform latent variable mediation analsis with 4 latent mediators and print
+#' # whether the original 20 mediators are "actively" related to mediation
+#' out <- mediate_lvma(A, M, Y, q = 4, rhoLM = 2, rhoEL = 2, rhoLY = 2, imax = 50)
+#' table(out$EBIC_out$mediator_active)
+#'
+#' @export
+#'
+
+mediate_lvma <- function(A, M, Y, q, rhoLM, rhoEL, rhoLY, scale = T, imax = 5000){
 
   n <- nrow(M)
   p <- ncol(M)
@@ -79,24 +92,19 @@ mediate_lvma <- function(A, M, Y, q, rho, scale = T, imax = 5000){
   if(!is.numeric(A) | !is.vector(A)) stop("A must be numeric vector.")
   if(!is.numeric(M) | !is.matrix(M)) stop("M must be numeric matrix.")
   if(!is.numeric(Y) | !is.vector(Y)) stop("Y must be numeric vector.")
-  if(is.null(colnames(M))){
-    colnames(M) <- paste0("m",1:ncol(M))
-  }
-  if(!is.null(C)){
-    if(!is.numeric(C) | !is.matrix(C)) stop("C must be numeric matrix.")
-  }
 
   #LVMA
   lvma_out <- lvma(
     A,
     M,
     Y,
+    q = q,
     rhoL = rhoLM,
     rhoE = rhoEL,
     rhoY = rhoLY,
     imax = imax
   )
-  
+
   results <- c()
   for(metric in c("EBIC", "BIC", "AIC")){
     results[[paste0(metric,"_out")]] <-
