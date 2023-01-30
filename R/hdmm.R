@@ -64,6 +64,13 @@
 #' @export
 #'
 #' @examples
+#' data("med_dat")
+#' A <- med_dat$A
+#' M <- med_dat$M
+#' Y <- med_dat$Y
+#' out <- mediate_hdmm(A, M, Y, sims = 50)
+#' out$effects
+#'
 
 mediate_hdmm <- function(A, M, Y, sims = 1000, boot_ci_type = "bca",
                  ci_level = 0.95, tol = 10^-5, theta = rep(1,5),
@@ -86,7 +93,7 @@ mediate_hdmm <- function(A, M, Y, sims = 1000, boot_ci_type = "bca",
   #Mediation analysis
   med <-
     suppressMessages(
-    mediate(fit.m, fit.y, treat = "A", mediator = "m", sims = sims, boot = T,
+    mediation::mediate(fit.m, fit.y, treat = "A", mediator = "m", sims = sims, boot = T,
             boot.ci.type = boot_ci_type, conf.level = ci_level))
 
   #Create empty results table

@@ -68,7 +68,7 @@ adlasso <- function(X, Y, nlambda = 100, nlambda2 = 50, nfolds = 5){
                     nfolds = nfolds, method = "ls")
 
   #Step 2: Compute weights and obtain second fit
-  coefs <- coef(mod1, s = "lambda.min")
+  coefs <- gcdnet::coef(mod1, s = "lambda.min")
   if(all(coefs[-1]==0)) return(get_blank(X))
   v_star <- log(sum(coefs!=0)) / log(n)
   gamma <- ceiling(2*v_star/(1 - v_star)) + 1
@@ -81,7 +81,7 @@ adlasso <- function(X, Y, nlambda = 100, nlambda2 = 50, nfolds = 5){
                     nfolds = nfolds, method = "ls")
 
   #Step 3: Process results
-  coefs1 <- coef(mod2, s = "lambda.min")[,1]
+  coefs1 <- gcdnet::coef(mod2, s = "lambda.min")[,1]
   if(all(coefs1[-1]==0)) return(get_blank(X))
   y_preds <- predict(mod2, X1, s = "lambda.min")
   s2 <- crossprod(Y - y_preds) / (n - sum(coefs1!=0) - 1)

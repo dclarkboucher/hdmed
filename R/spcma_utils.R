@@ -223,7 +223,7 @@ mediate_multiple <-
       set.seed(123) #using the same seed for each makes the sims more comparable
       re.med <-
         suppressMessages(
-        mediate(fit.m, fit.y, treat = "X", mediator = "M", sims = sims,
+        mediation::mediate(fit.m, fit.y, treat = "X", mediator = "M", sims = sims,
                         boot = T, boot.ci.type = boot.ci.type[1],
                         conf.level = conf.level))
 

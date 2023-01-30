@@ -4,9 +4,6 @@
 #https://github.com/YinanZheng/HIMA
 #https://github.com/YuzhaoGao/High-dimensional-mediation-analysis-R
 
-
-coef <- stats::coef
-
 blank_effects <- function(){
   warning("Null result. No mediators selected by the penalized model...")
   data.frame(matrix(NA,0,6))
@@ -83,7 +80,7 @@ hima <- function(X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
 
   lam <- fit$lambda[which.min(BIC(fit))]
   if(verbose) message("    Tuning parameter lambda selected: ", lam)
-  Coefficients <- coef(fit, lambda = lam)
+  Coefficients <- stats::coef(fit, lambda = lam)
   est <- Coefficients[2:(d + 1)]
   ID_1_non <- which(est != 0)
   if(length(ID_1_non) == 0) return(blank_effects())
@@ -137,7 +134,7 @@ hima <- function(X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
     YX <- data.frame(Y = Y, X = X, COV.MY)
   }
 
-  gamma_est <- coef(glm(Y ~ ., family = Y.family, data = YX))[2]
+  gamma_est <- stats::coef(glm(Y ~ ., family = Y.family, data = YX))[2]
 
   results <-
     data.frame(

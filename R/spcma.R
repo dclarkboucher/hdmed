@@ -68,8 +68,7 @@
 #' @import sandwich
 #' @import Matrix
 #' @import mediation
-#' @import igraph
-#' @import genlasso
+#' @importFrom genlasso fusedlasso1d genlasso
 #' @import sandwich
 #'
 #' @references Zhao, Y., Lindquist, M. A. & Caffo, B. S. Sparse principal

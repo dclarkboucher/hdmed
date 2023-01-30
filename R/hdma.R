@@ -63,6 +63,8 @@
 #' Fan, J. & Lv, J. Sure independence screening for ultrahigh dimensional
 #' feature space. J. R. Stat. Soc. 70, 849–911 (2008).
 #'
+#' \link{https://github.com/YuzhaoGao/High-dimensional-mediation-analysis-R}
+#'
 #' @examples
 #' data("med_dat")
 #' A <- med_dat$A
