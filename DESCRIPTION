@@ -1,9 +1,8 @@
 Package: MultiMed
 Title: Methods for Mediation Analysis with High-Dimensional Mediators
 Version: 0.0.0.9000
-Authors@R: 
-    person("Dylan", "Clark-Boucher", , "dclarkboucher@fas.harvard.edu", 
-    role = c("aut"), comment = c(ORCID = "0000-0001-7334-2966"))
+Author: Dylan Clark-Boucher
+Maintainer: Dylan Clark-Boucher <dclarkboucher@fas.harvard.edu>
 Description: MultiMed provides a suite of functions for performing mediation
     analysis when the mediators are high-dimensional. In addition to 
     centralizing the many existing packages for high-dimensional mediation, we 
@@ -20,8 +19,7 @@ Description: MultiMed provides a suite of functions for performing mediation
     al. 2019), MedFix (Zhang 2021), pathway LASSO (Zhao & Luo 2022), PCMA (Huang 
     & Pan 2016), and SPCMA (Zhao et al. 2020). References for the original 
     papers can be found in their respective functions.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

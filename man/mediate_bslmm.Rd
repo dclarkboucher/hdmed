@@ -14,7 +14,6 @@ mediate_bslmm(
   ndraws = 5000,
   ci_level = 0.95,
   weights = NULL,
-  inits = NULL,
   k = 2,
   lm0 = 1e-04,
   lm1 = 1,
@@ -88,7 +87,6 @@ posterior inclusion probability (PIP) of belonging to both larger-variance
 distributions is reported for each mediator as \code{ab_pip}.
 }
 \examples{
-data("med_dat")
 A <- med_dat$A
 M <- med_dat$M
 Y <- med_dat$Y
@@ -96,7 +94,7 @@ Y <- med_dat$Y
 # Toy example with small burnin and ndraws
 out <- mediate_bslmm(A, M, Y, burnin = 100, ndraws = 10)
 out$effects
-utils::head(out$contributions)
+head(out$contributions)
 
 
 }

@@ -3,6 +3,9 @@
 \name{mediate_spcma}
 \alias{mediate_spcma}
 \title{Sparse Principal Component Mediation Analysis for High-Dimensional Mediators}
+\source{
+\url{https://rdrr.io/github/zhaoyi1026/spcma/man/spcma.html}
+}
 \usage{
 mediate_spcma(
   A,
@@ -97,14 +100,13 @@ computed, inference proceeds exactly like in PCMA, and the PC-mediators are
 evaluated with methods from the \code{mediate} package.
 }
 \examples{
-data("med_dat")
 A <- med_dat$A
 M <- med_dat$M
 Y <- med_dat$Y
 
 # Fit SPCMA with the fused LASSO penalty while choosing the number of PCs based
 # on the variance they explain. In practice, var_per and sims should be higher.
-out <- mediate_spcma(A, M, Y, var_per = 0.25, fused = T, gamma = 2, sims = 10)
+out <- mediate_spcma(A, M, Y, var_per = 0.25, fused = TRUE, gamma = 2, sims = 10)
 out$effects
 
 }

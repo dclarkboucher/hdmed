@@ -42,8 +42,7 @@
 #' the unpenalized model are only those chosen by the penalized model. Note also
 #' that the HIMA authors apply Bonferroni correction to the final, maxed p-values
 #' to account for multiple testing, which we choose to leave up to the user. For
-#' more information, see the R package \code{\link{HIMA}} along with the provided
-#' reference.
+#' more information, see the "HIMA" R package along with the provided reference.
 #'
 #' @return A list containing:
 #' \itemize{
@@ -55,27 +54,29 @@
 #'
 #'
 #' @import foreach
+#' @import stats
 #'
 #'
 #' @references
 #' Zhang, H. et al. Estimating and testing high-dimensional mediation effects
 #' in epigenetic studies. Bioinformatics 32, 3150–3154 (2016).
 #'
+#' @source <https://rdrr.io/cran/HIMA/f/>
+#'
 #' @examples
-#' data("med_dat")
 #' A <- med_dat$A
 #' M <- med_dat$M
 #' Y <- med_dat$Y
 #'
 #' # Fit hima with continuous outcome
 #' out <- mediate_hima(A, M, Y)
-#' utils::head(out$contributions)
+#' head(out$contributions)
 #' out$effects
 #'
 #' # Fit hima with binary outcome
 #' Y1 <- as.numeric(Y > mean(Y))
-#' out1 <- mediate_hima(A, M, Y1, binary_y = T)
-#' utils::head(out1$contributions)
+#' out1 <- mediate_hima(A, M, Y1, binary_y = TRUE)
+#' head(out1$contributions)
 #' out1$effects
 #'
 #' @export
@@ -96,7 +97,7 @@ mediate_hima <- function(A, M, Y, C1 = NULL, C2 = NULL, binary_y = F,
   if (binary_y){
 
     family <- "binomial"
-    if(!all(y %in% c(0,1))){
+    if(!all(Y %in% c(0,1))){
       stop("Please code Y as 0 or 1 when invoking the binary_y flag.")
     }
 

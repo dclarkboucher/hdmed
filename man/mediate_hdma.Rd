@@ -3,6 +3,9 @@
 \name{mediate_hdma}
 \alias{mediate_hdma}
 \title{High-Dimensional Mediation Analysis}
+\source{
+\url{https://github.com/YuzhaoGao/High-dimensional-mediation-analysis-R}
+}
 \usage{
 mediate_hdma(
   A,
@@ -71,14 +74,13 @@ the global indirect effect from an estimate of the total effect. See References 
 more detail.
 }
 \examples{
-data("med_dat")
 A <- med_dat$A
 M <- med_dat$M
 Y <- med_dat$Y
 
 # Fit hdma with continuous outcomes
 out <- mediate_hdma(A, M, Y)
-utils::head(out$contributions)
+head(out$contributions)
 out$effects
 
 }
@@ -88,6 +90,4 @@ Epigenetic Studies. Front. Genet. 10, 1195 (2019).
 
 Fan, J. & Lv, J. Sure independence screening for ultrahigh dimensional
 feature space. J. R. Stat. Soc. 70, 849–911 (2008).
-
-\link{https://github.com/YuzhaoGao/High-dimensional-mediation-analysis-R}
 }

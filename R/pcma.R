@@ -52,9 +52,10 @@
 #' causal mediation model with  high-dimensional continuous mediators.
 #' Biometrics 72, 402–413 (2016).
 #'
+#' @source <https://rdrr.io/github/zhaoyi1026/spcma/man/spcma.html>
+#'
 #'
 #' @examples
-#' data("med_dat")
 #' A <- med_dat$A
 #' M <- med_dat$M
 #' Y <- med_dat$Y

@@ -54,17 +54,16 @@
 #' Fan, J. & Lv, J. Sure independence screening for ultrahigh dimensional
 #' feature space. J. R. Stat. Soc. 70, 849–911 (2008).
 #'
-#' \link{https://github.com/YuzhaoGao/High-dimensional-mediation-analysis-R}
+#' @source <https://github.com/YuzhaoGao/High-dimensional-mediation-analysis-R>
 #'
 #' @examples
-#' data("med_dat")
 #' A <- med_dat$A
 #' M <- med_dat$M
 #' Y <- med_dat$Y
 #'
 #' # Fit hdma with continuous outcomes
 #' out <- mediate_hdma(A, M, Y)
-#' utils::head(out$contributions)
+#' head(out$contributions)
 #' out$effects
 #'
 #' @export
@@ -84,7 +83,7 @@ mediate_hdma <- function(A, M, Y, C1 = NULL, C2 = NULL, binary_y = F,
   if (binary_y){
 
     family <- "binomial"
-    if(!all(y %in% c(0,1))){
+    if(!all(Y %in% c(0,1))){
       stop("Please code Y as 0 or 1 when invoking the binary_y flag.")
     }
 

@@ -56,13 +56,12 @@
 #' @references Chén, O. Y. et al. High-dimensional multivariate mediation with
 #' application to neuroimaging data. Biostatistics (Oxford, England) vol. 19 (2018).
 #'
-#' \link{https://github.com/oliverychen/PDM}
+#' @source <https://github.com/oliverychen/PDM>
 #'
 #'
 #' @export
 #'
 #' @examples
-#' data("med_dat")
 #' A <- med_dat$A
 #' M <- med_dat$M
 #' Y <- med_dat$Y

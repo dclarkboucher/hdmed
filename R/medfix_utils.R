@@ -39,7 +39,7 @@ adlasso <- function(X, Y, nlambda = 100, nlambda2 = 50, nfolds = 5){
 
     for(i in 1:nlambda2){
       cv_enet <-
-        cv.gcdnet(
+        gcdnet::cv.gcdnet(
           X,
           Y,
           lambda2 = lambda2_list[i],
@@ -64,7 +64,7 @@ adlasso <- function(X, Y, nlambda = 100, nlambda2 = 50, nfolds = 5){
   }
 
   #  Fit model
-  mod1 <- cv.gcdnet(X, Y, lambda2 = lambda2_use, standardize = T,
+  mod1 <- gcdnet::cv.gcdnet(X, Y, lambda2 = lambda2_use, standardize = T,
                     nfolds = nfolds, method = "ls")
 
   #Step 2: Compute weights and obtain second fit
@@ -77,7 +77,7 @@ adlasso <- function(X, Y, nlambda = 100, nlambda2 = 50, nfolds = 5){
   X1 <- X[, which(coefs[-1]!=0)]
   weights_ad_non0 <- weights_ad[which(coefs[-1] != 0)]
   message("   Fitting adaptive-weighted model...")
-  mod2 <- cv.gcdnet(X1, Y, standardize = T, pf = weights_ad_non0,
+  mod2 <- gcdnet::cv.gcdnet(X1, Y, standardize = T, pf = weights_ad_non0,
                     nfolds = nfolds, method = "ls")
 
   #Step 3: Process results

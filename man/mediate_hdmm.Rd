@@ -4,6 +4,9 @@
 \alias{mediate_hdmm}
 \title{High-dimensional Multivariate Mediation Analysis with
 Principal Directions of Mediation}
+\source{
+\url{https://github.com/oliverychen/PDM}
+}
 \usage{
 mediate_hdmm(
   A,
@@ -84,7 +87,6 @@ the set of mediators as a joint system. See the provided reference for more
 details.
 }
 \examples{
-data("med_dat")
 A <- med_dat$A
 M <- med_dat$M
 Y <- med_dat$Y
@@ -95,6 +97,4 @@ out$effects
 \references{
 Chén, O. Y. et al. High-dimensional multivariate mediation with
 application to neuroimaging data. Biostatistics (Oxford, England) vol. 19 (2018).
-
-\link{https://github.com/oliverychen/PDM}
 }

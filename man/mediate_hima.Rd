@@ -3,6 +3,9 @@
 \name{mediate_hima}
 \alias{mediate_hima}
 \title{High-Dimensional Mediation Analysis}
+\source{
+\url{https://rdrr.io/cran/HIMA/f/}
+}
 \usage{
 mediate_hima(
   A,
@@ -75,24 +78,22 @@ may be over-optimistic due to double-dipping, since the mediators tested in
 the unpenalized model are only those chosen by the penalized model. Note also
 that the HIMA authors apply Bonferroni correction to the final, maxed p-values
 to account for multiple testing, which we choose to leave up to the user. For
-more information, see the R package \code{\link{HIMA}} along with the provided
-reference.
+more information, see the "HIMA" R package along with the provided reference.
 }
 \examples{
-data("med_dat")
 A <- med_dat$A
 M <- med_dat$M
 Y <- med_dat$Y
 
 # Fit hima with continuous outcome
 out <- mediate_hima(A, M, Y)
-utils::head(out$contributions)
+head(out$contributions)
 out$effects
 
 # Fit hima with binary outcome
 Y1 <- as.numeric(Y > mean(Y))
-out1 <- mediate_hima(A, M, Y1, binary_y = T)
-utils::head(out1$contributions)
+out1 <- mediate_hima(A, M, Y1, binary_y = TRUE)
+head(out1$contributions)
 out1$effects
 
 }

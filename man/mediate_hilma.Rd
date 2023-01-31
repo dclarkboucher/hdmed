@@ -52,26 +52,18 @@ Zhou et al. (2020) for mediation settings when there are high-dimensional
 mediators and one or several exposures. The function returns estimates of
 the direct effect, total effect, and global mediation effect, the last of which
 is tested for statistical significance with a reported p-value. For additional
-detail, see the attached reference as well as the \code{\link{hilma}}
+detail, see the attached reference as well as the \code{\link[freebird:hilma]{freebird::hilma()}}
 documentation.
 }
 \examples{
-data("med_dat")
 A <- med_dat$A
 M <- med_dat$M
 Y <- med_dat$Y
 
 # Implement HILMA with one exposure
-out <- hilma(A, M, Y)
+out <- mediate_hilma(A, M, Y)
 out$a1
 
-# Implement HILMA with two exposures
-A2 <- rnorm(length(A))
-A <- cbind(A,A2)
-colnames(A) <- c("exposure1", "exposure2") # can be named or unnamed
-out <- hilma(A, M, Y)
-out$exposure1
-out$exposure2
 
 
 }

@@ -46,7 +46,6 @@
 #' authors, see the supplemental files of the referenced manuscript.
 #'
 #'
-#' @import gcdnet
 #'
 #'
 #' @return A list containing:
@@ -62,7 +61,6 @@
 #' Gene Identification. Statistics in biosciences (2021)
 #'
 #' @examples
-#' data("med_dat")
 #' A <- med_dat$Y
 #' M <- med_dat$M
 #' Y <- med_dat$Y

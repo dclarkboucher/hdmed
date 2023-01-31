@@ -64,8 +64,9 @@
 #' Sun, W., Wang, J. & Fang, Y. Consistent selection of tuning parameters via
 #' variable selection stability. J. Mach. Learn. Res. 14, 3419–3440 (2013).
 #'
+#' @source <https://github.com/zhaoyi1026/PathwayLasso>
+#'
 #' @examples
-#' data("med_dat")
 #' A <- med_dat$A
 #' M <- med_dat$M
 #' Y <- med_dat$Y
@@ -81,6 +82,8 @@
 mediate_plasso <- function(A, M, Y, lambdas = NULL, select_lambda = F,
                            vss_rep = 5,vss_cutoff = 0.1, omega_ratio = 1,
                            phi = 2, maxit = 5000, tol = 1e-6){
+
+  p <- ncol(M)
 
   # Check A, M, Y
   if (is.data.frame(M)) M <- as.matrix(M)

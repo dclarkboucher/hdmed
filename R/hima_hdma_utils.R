@@ -197,7 +197,7 @@ hdma <- function (X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
   if (is.null(COV.MY)) {
     suppressMessages(
       if (method == "lasso") fit <-
-        hdi::lasso.proj(XM, Y, family = family) else fit <- ridge.proj(XM, Y, family = family)
+        hdi::lasso.proj(XM, Y, family = family) else fit <- hdi::ridge.proj(XM, Y, family = family)
     )
 
   } else {
@@ -207,7 +207,7 @@ hdma <- function (X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
     XM_COV <- cbind(XM, COV.MY)
 
     suppressMessages(
-      if (method == "lasso") fit <- hdi::lasso.proj(XM_COV, Y, family = family) else fit <- ridge.proj(XM_COV, Y, family = family)
+      if (method == "lasso") fit <- hdi::lasso.proj(XM_COV, Y, family = family) else fit <- hdi::ridge.proj(XM_COV, Y, family = family)
     )
 
     }

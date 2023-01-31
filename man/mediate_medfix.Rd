@@ -79,7 +79,6 @@ MedFix when the exposures are high-dimensional, as proposed by the
 authors, see the supplemental files of the referenced manuscript.
 }
 \examples{
-data("med_dat")
 A <- med_dat$Y
 M <- med_dat$M
 Y <- med_dat$Y

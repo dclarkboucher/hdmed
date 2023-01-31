@@ -56,7 +56,6 @@
 #' causal mediation effects in omics studies. Biometrics 76, 700–710 (2020).
 #'
 #' @examples
-#' data("med_dat")
 #' A <- med_dat$A
 #' M <- med_dat$M
 #' Y <- med_dat$Y
@@ -64,13 +63,13 @@
 #' # Toy example with small burnin and ndraws
 #' out <- mediate_bslmm(A, M, Y, burnin = 100, ndraws = 10)
 #' out$effects
-#' utils::head(out$contributions)
+#' head(out$contributions)
 #'
 #'
 #' @export
 #'
 mediate_bslmm <- function(A, M, Y, C1 = NULL, C2 = C1, burnin = 30000, ndraws = 5000,
-                  ci_level = 0.95, weights = NULL, inits = NULL, k = 2,
+                  ci_level = 0.95, weights = NULL, k = 2,
                   lm0 = 1e-4, lm1 = 1, lma1 = 1, l = 1){
 
   p <- ncol(M)
@@ -107,7 +106,7 @@ mediate_bslmm <- function(A, M, Y, C1 = NULL, C2 = C1, burnin = 30000, ndraws = 
   }
 
   if(is.null(colnames(M))){
-    colnames(M) <- paste0(m,1:p)
+    colnames(M) <- paste0("m",1:p)
   }
 
   if(is.null(C1)){

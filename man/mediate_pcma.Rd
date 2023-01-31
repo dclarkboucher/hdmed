@@ -3,6 +3,9 @@
 \name{mediate_pcma}
 \alias{mediate_pcma}
 \title{Principal Component Mediation Analysis for High-dimensional Mediators}
+\source{
+\url{https://rdrr.io/github/zhaoyi1026/spcma/man/spcma.html}
+}
 \usage{
 mediate_pcma(
   A,
@@ -69,7 +72,6 @@ by using the \code{\link[mediation:mediate]{mediation::mediate()}} function. The
 by summing the mediation effects of the individual PCs.
 }
 \examples{
-data("med_dat")
 A <- med_dat$A
 M <- med_dat$M
 Y <- med_dat$Y

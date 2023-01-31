@@ -3,6 +3,9 @@
 \name{mediate_plasso}
 \alias{mediate_plasso}
 \title{Pathway LASSO for Mediation Analysis with High-Dimensional Mediators}
+\source{
+\url{https://github.com/zhaoyi1026/PathwayLasso}
+}
 \usage{
 mediate_plasso(
   A,
@@ -85,7 +88,6 @@ long list of tuning parameters, since it involves re-fitting pathway LASSO
 many times.
 }
 \examples{
-data("med_dat")
 A <- med_dat$A
 M <- med_dat$M
 Y <- med_dat$Y
