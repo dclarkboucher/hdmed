@@ -64,12 +64,7 @@
 #'
 #'
 #' @import MASS
-#' @import mvtnorm
-#' @import sandwich
-#' @import Matrix
-#' @import mediation
-#' @importFrom genlasso fusedlasso1d genlasso
-#' @import sandwich
+#'
 #'
 #' @references Zhao, Y., Lindquist, M. A. & Caffo, B. S. Sparse principal
 #' component based high-dimensional mediation analysis. Comput. Stat.

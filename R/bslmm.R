@@ -51,7 +51,6 @@
 #' }
 #'
 #'
-#' @import bama
 #'
 #' @references Song, Y. et al. Bayesian shrinkage estimation of high dimensional
 #' causal mediation effects in omics studies. Biometrics 76, 700–710 (2020).
@@ -121,9 +120,9 @@ mediate_bslmm <- function(A, M, Y, C1 = NULL, C2 = C1, burnin = 30000, ndraws = 
 
   controls <- list(k = k, lm0 = lm0, lm1 = lm1, lma1 = lma1, l = l)
 
-  bama_out <- bama(Y, A, M, C1 = C1, C2 = C2, method = "BSLMM",
-                   burnin = burnin, ndraws = ndraws + burnin,
-                   weights = weights, control = controls)
+  bama_out <- bama::bama(Y, A, M, C1 = C1, C2 = C2, method = "BSLMM",
+                         burnin = burnin, ndraws = ndraws + burnin,
+                         weights = weights, control = controls)
 
   #Organize mediation contributions
   ab <- with(bama_out, alpha.a * beta.m)

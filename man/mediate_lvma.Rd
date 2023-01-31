@@ -46,7 +46,7 @@ is associated with both A and Y.
 }
 \description{
 \code{mediate_lvma} fits a high-dimensional mediation model described
-by Derkach et. al (2019), in which a small number of latent, unmeasured
+by Derkach et al. (2019), in which a small number of latent, unmeasured
 mediators replace the original mediators in the model.
 }
 \details{

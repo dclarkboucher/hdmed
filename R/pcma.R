@@ -47,9 +47,6 @@
 #'
 #'
 #' @import MASS
-#' @import Matrix
-#' @import sandwich
-#' @import mediation
 #'
 #' @references Huang, Y.-T. & Pan, W.-C. Hypothesis test of mediation effect in
 #' causal mediation model with  high-dimensional continuous mediators.

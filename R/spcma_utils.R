@@ -118,10 +118,10 @@ R2.flasso <- #Fixed!
     # first PC lambda choice
     if(is.null(D))
     {
-      out.tmp<-fusedlasso1d(y=E.pc[,1],X=E,gamma=gamma,eps=eps,maxsteps=maxsteps)
+      out.tmp<- genlasso::fusedlasso1d(y=E.pc[,1],X=E,gamma=gamma,eps=eps,maxsteps=maxsteps)
     }else
     {
-      out.tmp<-genlasso(y=E.pc[,1],X=E,D=D,eps=eps,maxsteps=maxsteps)
+      out.tmp<-genlasso::genlasso(y=E.pc[,1],X=E,D=D,eps=eps,maxsteps=maxsteps)
     }
     var.per.tmp<-rep(NA,length(out.tmp$lambda))
     for(k in 1:length(out.tmp$lambda))
@@ -147,11 +147,11 @@ R2.flasso <- #Fixed!
 
       if(is.null(D))
       {
-        out.tmp<-fusedlasso1d(y=Etmp[,j],X=E,gamma=gamma,eps=eps,maxsteps=maxsteps)
+        out.tmp<-genlasso::fusedlasso1d(y=Etmp[,j],X=E,gamma=gamma,eps=eps,maxsteps=maxsteps)
       }else
       {
         #out.tmp<-fusedlasso(y=Etmp[,j],X=E,D=D,gamma=gamma,eps=eps,maxsteps=maxsteps)
-        out.tmp<-genlasso(y=Etmp[,j],X=E,D=D,eps=eps,maxsteps=maxsteps)
+        out.tmp<-genlasso::genlasso(y=Etmp[,j],X=E,D=D,eps=eps,maxsteps=maxsteps)
       }
 
       var.per.tmp=var.per.tol.tmp<-rep(NA,length(out.tmp$lambda))

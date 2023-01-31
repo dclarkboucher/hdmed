@@ -54,12 +54,7 @@
 #' }
 #'
 #'
-#' @import glmnet
-#' @import ncvreg
-#' @import Matrix
-#' @import stats
 #' @import foreach
-#' @import iterators
 #'
 #'
 #' @references

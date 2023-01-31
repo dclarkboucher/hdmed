@@ -51,8 +51,6 @@
 #'     intervals, and p-values of the mediation effects.}
 #' }
 #'
-#' @import MASS
-#' @import mediation
 #'
 #'
 #' @references Chén, O. Y. et al. High-dimensional multivariate mediation with

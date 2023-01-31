@@ -63,7 +63,7 @@ hima <- function(X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
   message("Fitting outcome model with MCP...")
   ## Based on the screening results in step 1. We will find the most influential M on Y.
   if(is.null(COV.MY)) {
-    fit <- ncvreg(XM, Y, family = Y.family,
+    fit <- ncvreg::ncvreg(XM, Y, family = Y.family,
                   penalty = penalty,
                   penalty.factor = c(rep(1, ncol(M_SIS)), 0), ...)
   } else {
@@ -72,7 +72,7 @@ hima <- function(X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
     conf.names <- colnames(COV.MY)
     if(verbose) message("    Adjusting for covariate(s): ", paste0(conf.names, collapse = ", "))
     XM_COV <- cbind(XM, COV.MY)
-    fit <- ncvreg(XM_COV, Y, family = Y.family,
+    fit <- ncvreg::ncvreg(XM_COV, Y, family = Y.family,
                   penalty = penalty,
                   penalty.factor = c(rep(1, ncol(M_SIS)), rep(0, 1 + ncol(COV.MY))), ...)
   }
@@ -195,16 +195,22 @@ hdma <- function (X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
   message("Fitting outcome model with de-biased LASSO...")
   ## Based on the SIS results in step 1. We will find the most influential M on Y.
   if (is.null(COV.MY)) {
-    set.seed(1029)
-    if (method == "lasso") fit <- lasso.proj(XM, Y, family = family) else fit <- ridge.proj(XM, Y, family = family)
+    suppressMessages(
+      if (method == "lasso") fit <-
+        hdi::lasso.proj(XM, Y, family = family) else fit <- ridge.proj(XM, Y, family = family)
+    )
+
   } else {
     COV.MY <- data.frame(COV.MY)
     COV.MY <- data.frame(model.matrix(~., COV.MY))[, -1]
     conf.names <- colnames(COV.MY)
     XM_COV <- cbind(XM, COV.MY)
-    set.seed(1029)
-    if (method == "lasso") fit <- lasso.proj(XM_COV, Y, family = family) else fit <- ridge.proj(XM_COV, Y, family = family)
-  }
+
+    suppressMessages(
+      if (method == "lasso") fit <- hdi::lasso.proj(XM_COV, Y, family = family) else fit <- ridge.proj(XM_COV, Y, family = family)
+    )
+
+    }
   P_hdi <- fit$pval[1:length(ID)]
   index <- which(P_hdi<=0.05)
 
@@ -280,7 +286,7 @@ himasis <- function(Y, M, X, COV, glm.family, modelstatement, verbose, tag) {
   doOne <- eval(parse(text = doOneGen(paste0("try(glm(modelstatement, family = ",
                                              glm.family, ", data = datarun))"), "c(1,4)")))
 
-  registerDoSEQ()
+  foreach::registerDoSEQ()
   ncore <- 1
   results <- foreach(n = iterators::idiv(L.M, chunks = ncore),
                      M_chunk = iblkcol_lag(M, chunks = ncore),

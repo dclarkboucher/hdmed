@@ -46,15 +46,6 @@
 #' }
 #'
 #'
-#' @import glmnet
-#' @import stats
-#' @import hdi
-#' @import MASS
-#' @import utils
-#' @import foreach
-#' @import iterators
-#' @import scalreg
-#' @import lars
 #'
 #' @references
 #' Gao, Y. et al. Testing Mediation Effects in High-Dimensional
