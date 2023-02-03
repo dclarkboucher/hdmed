@@ -45,4 +45,5 @@ Imports:
     sandwich (>= 3.0.2),
     scalreg (>= 1.0.1),
     stats (>= 4.2.2),
-    utils (>= 4.2.2)
+    utils (>= 4.2.2),
+    HIMA (>= 2.0.1)
