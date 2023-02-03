@@ -51,12 +51,14 @@
 #'     intervals, and p-values of the mediation effects.}
 #' }
 #'
-#'
+#' @import utils
+#' @import stats
+#' @importFrom mediation mediate
 #'
 #' @references Chén, O. Y. et al. High-dimensional multivariate mediation with
 #' application to neuroimaging data. Biostatistics (Oxford, England) vol. 19 (2018).
 #'
-#' @source <https://github.com/oliverychen/PDM>
+#' @source \url{https://github.com/oliverychen/PDM}
 #'
 #'
 #' @export

@@ -36,6 +36,7 @@
 #' @param maxsteps an integer specifying the maximum number of steps for the
 #' algorithm before termination (see [genlasso::genlasso()]). Default
 #' is 2000.
+#' @param seed seed used for fitting single-mediator models after PCA
 #'
 #' @details
 #' \code{mediate_spcma} performs principal component mediation analysis, comparable
@@ -64,13 +65,15 @@
 #'
 #'
 #' @import MASS
+#' @import genlasso
+#' @importFrom mediation mediate
 #'
 #'
 #' @references Zhao, Y., Lindquist, M. A. & Caffo, B. S. Sparse principal
 #' component based high-dimensional mediation analysis. Comput. Stat.
 #' Data Anal. 142, 106835 (2020).
 #'
-#' @source <https://rdrr.io/github/zhaoyi1026/spcma/man/spcma.html>
+#' @source \url{https://rdrr.io/github/zhaoyi1026/spcma}
 #'
 #' @examples
 #' A <- med_dat$A
@@ -88,7 +91,7 @@
 mediate_spcma <-
   function(A, M, Y, var_per = 0.8, n_pc = NULL, sims = 1000,
            boot_ci_type = "bca", ci_level = 0.95, fused = FALSE,  gamma = 0,
-           per_jump = 0.7, eps = 1e-4, maxsteps = 2000){
+           per_jump = 0.7, eps = 1e-4, maxsteps = 2000, seed = 1){
 
     # Create column names if absent
     p <- ncol(M)
@@ -131,8 +134,15 @@ mediate_spcma <-
 
     # Run marginal mediation on sparse PCs
     spcma_out <-
-      mediate_multiple(A, pcs, Y, sims = sims, boot.ci.type = boot_ci_type,
-                       conf.level = ci_level)
+      mediate_multiple(
+        A,
+        pcs,
+        Y,
+        sims = sims,
+        boot.ci.type = boot_ci_type,
+        conf.level = ci_level,
+        seed = seed
+      )
 
     # Organize mediation contributions
     contributions <-

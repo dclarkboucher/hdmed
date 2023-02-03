@@ -36,9 +36,10 @@
 #' the mediation contributions by taking the maximum of the \eqn{\alpha_a} and \eqn{\beta_m}
 #' p-values, where the beta p-values are obtained via a second, unpenalized generalized
 #' linear model containing only the mediators selected by the MCP. We include this
-#' p-value computation so that our function replicates the behavior of [HIMA::hima()],
-#' the function on which ours is based, but we caution that the beta p-values
-#' may be over-optimistic due to double-dipping, since the mediators tested in
+#' p-value computation so that our function replicates the behavior of the
+#' \code{HIMA} function from \href{https://CRAN.R-project.org/package=HIMA}{HIMA}
+#' package, the function on which ours is based, but we caution that the beta
+#' p-values may be over-optimisticdue to double-dipping, since the mediators tested in
 #' the unpenalized model are only those chosen by the penalized model. Note also
 #' that the HIMA authors apply Bonferroni correction to the final, maxed p-values
 #' to account for multiple testing, which we choose to leave up to the user. For
@@ -52,16 +53,16 @@
 #'     mediation, and total effects}
 #' }
 #'
-#'
+#' @import ncvreg
+#' @import iterators
 #' @import foreach
-#' @import stats
+#' @importFrom stats coef
 #'
 #'
 #' @references
 #' Zhang, H. et al. Estimating and testing high-dimensional mediation effects
 #' in epigenetic studies. Bioinformatics 32, 3150–3154 (2016).
 #'
-#' @source <https://rdrr.io/cran/HIMA/f/>
 #'
 #' @examples
 #' A <- med_dat$A

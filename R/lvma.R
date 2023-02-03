@@ -58,12 +58,11 @@
 #' is associated with both A and Y.
 #'
 #'
-#'
 #' @references
 #' Derkach, A., Pfeiffer, R. M., Chen, T.-H. & Sampson, J. N. High dimensional
 #' mediation analysis with latent variables. Biometrics 75, 745–756 (2019).
 #'
-#' @source <https://onlinelibrary.wiley.com/doi/abs/10.1111/biom.13053>
+#' @source \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8811931/}
 #'
 #' @examples
 #' A <- med_dat$A

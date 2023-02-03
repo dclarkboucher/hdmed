@@ -34,7 +34,7 @@
 #' the estimated direct, total, and global mediation effects. A p-value is
 #' provided for the global mediation effect.
 #'
-#'
+#' @importFrom freebird hilma
 #'
 #' @references Zhou, R. R., Wang, L. & Zhao, S. D. Estimation and inference for
 #' the indirect effect in high-dimensional linear mediation models. Biometrika
@@ -91,7 +91,7 @@ mediate_hilma <- function(A, M, Y, aic_tuning = F, nlambda = 5,
 
   if (!aic_tuning){
 
-    hilma_out <- freebird::hilma(Y, M, A, mediation_setting = "incomplete",
+    hilma_out <- hilma(Y, M, A, mediation_setting = "incomplete",
                        tuning_method = "uniform", center = center,
                        n.lambda = 1)
 

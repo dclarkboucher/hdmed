@@ -4,7 +4,7 @@
 \alias{mediate_spcma}
 \title{Sparse Principal Component Mediation Analysis for High-Dimensional Mediators}
 \source{
-\url{https://rdrr.io/github/zhaoyi1026/spcma/man/spcma.html}
+\url{https://rdrr.io/github/zhaoyi1026/spcma}
 }
 \usage{
 mediate_spcma(
@@ -20,7 +20,8 @@ mediate_spcma(
   gamma = 0,
   per_jump = 0.7,
   eps = 1e-04,
-  maxsteps = 2000
+  maxsteps = 2000,
+  seed = 1
 )
 }
 \arguments{
@@ -69,6 +70,8 @@ Default is \code{1e-4}.}
 \item{maxsteps}{an integer specifying the maximum number of steps for the
 algorithm before termination (see \code{\link[genlasso:genlasso]{genlasso::genlasso()}}). Default
 is 2000.}
+
+\item{seed}{seed used for fitting single-mediator models after PCA}
 }
 \value{
 A list containing:

@@ -64,7 +64,7 @@
 #' Sun, W., Wang, J. & Fang, Y. Consistent selection of tuning parameters via
 #' variable selection stability. J. Mach. Learn. Res. 14, 3419–3440 (2013).
 #'
-#' @source <https://github.com/zhaoyi1026/PathwayLasso>
+#' @source \url{https://github.com/zhaoyi1026/PathwayLasso}
 #'
 #' @examples
 #' A <- med_dat$A

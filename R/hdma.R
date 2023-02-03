@@ -45,7 +45,9 @@
 #'     mediation, and total effects}
 #' }
 #'
-#'
+#' @import hdi
+#' @import foreach
+#' @import iterators
 #'
 #' @references
 #' Gao, Y. et al. Testing Mediation Effects in High-Dimensional
@@ -54,7 +56,7 @@
 #' Fan, J. & Lv, J. Sure independence screening for ultrahigh dimensional
 #' feature space. J. R. Stat. Soc. 70, 849–911 (2008).
 #'
-#' @source <https://github.com/YuzhaoGao/High-dimensional-mediation-analysis-R>
+#' @source \url{https://github.com/YuzhaoGao/High-dimensional-mediation-analysis-R}
 #'
 #' @examples
 #' A <- med_dat$A

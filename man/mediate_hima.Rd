@@ -3,9 +3,6 @@
 \name{mediate_hima}
 \alias{mediate_hima}
 \title{High-Dimensional Mediation Analysis}
-\source{
-\url{https://rdrr.io/cran/HIMA/f/}
-}
 \usage{
 mediate_hima(
   A,
@@ -72,9 +69,10 @@ indirect effect from an estimate of the total effect. We compute p-values for
 the mediation contributions by taking the maximum of the \eqn{\alpha_a} and \eqn{\beta_m}
 p-values, where the beta p-values are obtained via a second, unpenalized generalized
 linear model containing only the mediators selected by the MCP. We include this
-p-value computation so that our function replicates the behavior of \code{\link[HIMA:hima]{HIMA::hima()}},
-the function on which ours is based, but we caution that the beta p-values
-may be over-optimistic due to double-dipping, since the mediators tested in
+p-value computation so that our function replicates the behavior of the
+\code{HIMA} function from \href{https://CRAN.R-project.org/package=HIMA}{HIMA}
+package, the function on which ours is based, but we caution that the beta
+p-values may be over-optimisticdue to double-dipping, since the mediators tested in
 the unpenalized model are only those chosen by the penalized model. Note also
 that the HIMA authors apply Bonferroni correction to the final, maxed p-values
 to account for multiple testing, which we choose to leave up to the user. For

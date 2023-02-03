@@ -118,10 +118,10 @@ R2.flasso <- #Fixed!
     # first PC lambda choice
     if(is.null(D))
     {
-      out.tmp<- genlasso::fusedlasso1d(y=E.pc[,1],X=E,gamma=gamma,eps=eps,maxsteps=maxsteps)
+      out.tmp <- fusedlasso1d(y=E.pc[,1],X=E,gamma=gamma,eps=eps,maxsteps=maxsteps)
     }else
     {
-      out.tmp<-genlasso::genlasso(y=E.pc[,1],X=E,D=D,eps=eps,maxsteps=maxsteps)
+      out.tmp <- genlasso(y=E.pc[,1],X=E,D=D,eps=eps,maxsteps=maxsteps)
     }
     var.per.tmp<-rep(NA,length(out.tmp$lambda))
     for(k in 1:length(out.tmp$lambda))
@@ -147,11 +147,11 @@ R2.flasso <- #Fixed!
 
       if(is.null(D))
       {
-        out.tmp<-genlasso::fusedlasso1d(y=Etmp[,j],X=E,gamma=gamma,eps=eps,maxsteps=maxsteps)
+        out.tmp<-fusedlasso1d(y=Etmp[,j],X=E,gamma=gamma,eps=eps,maxsteps=maxsteps)
       }else
       {
         #out.tmp<-fusedlasso(y=Etmp[,j],X=E,D=D,gamma=gamma,eps=eps,maxsteps=maxsteps)
-        out.tmp<-genlasso::genlasso(y=Etmp[,j],X=E,D=D,eps=eps,maxsteps=maxsteps)
+        out.tmp<-genlasso(y=Etmp[,j],X=E,D=D,eps=eps,maxsteps=maxsteps)
       }
 
       var.per.tmp=var.per.tol.tmp<-rep(NA,length(out.tmp$lambda))
@@ -174,7 +174,7 @@ R2.flasso <- #Fixed!
 
 mediate_multiple <-
   function(X, M, Y, sims = 1000, boot.ci.type = c("bca", "perc"),
-           conf.level = 0.95)
+           conf.level = 0.95, seed = 1)
   {
     n <- nrow(M)
     p <- ncol(M)
@@ -220,10 +220,10 @@ mediate_multiple <-
           confint(fit.y,level=conf.level)[3,]
         )
 
-      set.seed(123) #using the same seed for each makes the sims more comparable
+      set.seed(seed) #using the same seed for each makes the sims more comparable
       re.med <-
         suppressMessages(
-        mediation::mediate(fit.m, fit.y, treat = "X", mediator = "M", sims = sims,
+        mediate(fit.m, fit.y, treat = "X", mediator = "M", sims = sims,
                         boot = T, boot.ci.type = boot.ci.type[1],
                         conf.level = conf.level))
 

@@ -4,7 +4,7 @@
 \alias{mediate_pcma}
 \title{Principal Component Mediation Analysis for High-dimensional Mediators}
 \source{
-\url{https://rdrr.io/github/zhaoyi1026/spcma/man/spcma.html}
+\url{https://rdrr.io/github/zhaoyi1026/spcma}
 }
 \usage{
 mediate_pcma(
@@ -15,7 +15,8 @@ mediate_pcma(
   n_pc = NULL,
   sims = 1000,
   boot_ci_type = "bca",
-  ci_level = 0.95
+  ci_level = 0.95,
+  seed = 1
 )
 }
 \arguments{
@@ -43,6 +44,8 @@ If \code{"perc"}, percentile confidence intervals will be estimated
 (see \code{\link[mediation:mediate]{mediation::mediate()}}). Default is "bca".}
 
 \item{ci_level}{the desired confidence level. Default is 0.95.}
+
+\item{seed}{seed used for fitting single-mediator models after PCA}
 }
 \value{
 A list containing:

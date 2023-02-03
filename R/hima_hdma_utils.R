@@ -63,7 +63,7 @@ hima <- function(X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
   message("Fitting outcome model with MCP...")
   ## Based on the screening results in step 1. We will find the most influential M on Y.
   if(is.null(COV.MY)) {
-    fit <- ncvreg::ncvreg(XM, Y, family = Y.family,
+    fit <- ncvreg(XM, Y, family = Y.family,
                   penalty = penalty,
                   penalty.factor = c(rep(1, ncol(M_SIS)), 0), ...)
   } else {
@@ -72,7 +72,7 @@ hima <- function(X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
     conf.names <- colnames(COV.MY)
     if(verbose) message("    Adjusting for covariate(s): ", paste0(conf.names, collapse = ", "))
     XM_COV <- cbind(XM, COV.MY)
-    fit <- ncvreg::ncvreg(XM_COV, Y, family = Y.family,
+    fit <- ncvreg(XM_COV, Y, family = Y.family,
                   penalty = penalty,
                   penalty.factor = c(rep(1, ncol(M_SIS)), rep(0, 1 + ncol(COV.MY))), ...)
   }
@@ -80,7 +80,7 @@ hima <- function(X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
 
   lam <- fit$lambda[which.min(BIC(fit))]
   if(verbose) message("    Tuning parameter lambda selected: ", lam)
-  Coefficients <- stats::coef(fit, lambda = lam)
+  Coefficients <- coef(fit, lambda = lam)
   est <- Coefficients[2:(d + 1)]
   ID_1_non <- which(est != 0)
   if(length(ID_1_non) == 0) return(blank_effects())
@@ -134,7 +134,7 @@ hima <- function(X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
     YX <- data.frame(Y = Y, X = X, COV.MY)
   }
 
-  gamma_est <- stats::coef(glm(Y ~ ., family = Y.family, data = YX))[2]
+  gamma_est <- coef(glm(Y ~ ., family = Y.family, data = YX))[2]
 
   results <-
     data.frame(
@@ -197,7 +197,7 @@ hdma <- function (X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
   if (is.null(COV.MY)) {
     suppressMessages(
       if (method == "lasso") fit <-
-        hdi::lasso.proj(XM, Y, family = family) else fit <- hdi::ridge.proj(XM, Y, family = family)
+        lasso.proj(XM, Y, family = family) else fit <- ridge.proj(XM, Y, family = family)
     )
 
   } else {
@@ -207,7 +207,7 @@ hdma <- function (X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
     XM_COV <- cbind(XM, COV.MY)
 
     suppressMessages(
-      if (method == "lasso") fit <- hdi::lasso.proj(XM_COV, Y, family = family) else fit <- hdi::ridge.proj(XM_COV, Y, family = family)
+      if (method == "lasso") fit <- lasso.proj(XM_COV, Y, family = family) else fit <- ridge.proj(XM_COV, Y, family = family)
     )
 
     }
@@ -241,7 +241,7 @@ hdma <- function (X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
   } else {
     YX <- data.frame(Y = Y, X = X, COV.MY)
   }
-  gamma_est <- stats::coef(glm(Y ~ ., family = family, data = YX))[2]
+  gamma_est <- coef(glm(Y ~ ., family = family, data = YX))[2]
   results <-
     data.frame(
       mediator = colnames(M_SIS)[index],
@@ -309,10 +309,10 @@ doOneGen <- function(model.text, colind.text) {
 #Helper function used by himasis (above)
 iblkcol_lag <- function(M, ...) {
   i <- 1
-  it <- iterators::idiv(ncol(M), ...)
+  it <- idiv(ncol(M), ...)
 
   nextEl <- function() {
-    n <- iterators::nextElem(it)
+    n <- nextElem(it)
     r <- seq(i, length = n)
     i <<- i + n
     M[, r, drop = FALSE]

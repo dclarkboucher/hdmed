@@ -20,6 +20,7 @@
 #' If \code{"perc"}, percentile confidence intervals will be estimated
 #' (see [mediation::mediate()]). Default is "bca".
 #' @param ci_level the desired confidence level. Default is 0.95.
+#' @param seed seed used for fitting single-mediator models after PCA
 #'
 #' @details
 #' Principal component mediation analysis (PCMA) is a method for estimating
@@ -47,12 +48,14 @@
 #'
 #'
 #' @import MASS
+#' @importFrom mediation mediate
+#' @importFrom stats coef
 #'
 #' @references Huang, Y.-T. & Pan, W.-C. Hypothesis test of mediation effect in
 #' causal mediation model with  high-dimensional continuous mediators.
 #' Biometrics 72, 402–413 (2016).
 #'
-#' @source <https://rdrr.io/github/zhaoyi1026/spcma/man/spcma.html>
+#' @source \url{https://rdrr.io/github/zhaoyi1026/spcma}
 #'
 #'
 #' @examples
@@ -71,7 +74,7 @@
 
 mediate_pcma <-
   function(A, M, Y, var_per = 0.8, n_pc = NULL, sims = 1000,
-           boot_ci_type = "bca", ci_level = 0.95){
+           boot_ci_type = "bca", ci_level = 0.95, seed = 1){
 
     # Create column names if absent
     p <- ncol(M)
@@ -116,7 +119,8 @@ mediate_pcma <-
         Y,
         sims = sims,
         boot.ci.type = boot_ci_type,
-        conf.level = ci_level
+        conf.level = ci_level,
+        seed = seed
       )
 
     # Organize mediation contributions

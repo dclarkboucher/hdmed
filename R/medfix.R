@@ -46,7 +46,7 @@
 #' authors, see the supplemental files of the referenced manuscript.
 #'
 #'
-#'
+#' @importFrom gcdnet gcdnet cv.gcdnet
 #'
 #' @return A list containing:
 #' \itemize{
