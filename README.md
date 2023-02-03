@@ -35,6 +35,22 @@ causal pathway between $A$ and $Y$. Then, supposing we have data on $n$
 individuals, we can evaluate the mediating role of $\mathbf{M}$ with the
 equations
 
+$$
+\begin{equation}
+\begin{gather}
+E[\mathbf{Y_i}|A_i,\mathbf{M}_i,\mathbf{C_i}] = \beta_aA_i+\mathbf{\beta_m}^T\mathbf{M_i} + \mathbf{\beta_c}^T\mathbf{C_i} 
+\end{gather}
+\end{equation}
+$$
+
+and
+
+$$
+\begin{gather}
+E[\mathbf{Y_i}|A_i,\mathbf{M}_i,\mathbf{C_i}] = \beta_aA_i+\mathbf{\beta_m}^T\mathbf{M_i} + \mathbf{\beta_c}^T\mathbf{C_i} 
+\end{gather}
+$$
+
 ``` r
 library(hdmed)
 ## basic example code
