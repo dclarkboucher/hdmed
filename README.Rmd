@@ -37,16 +37,16 @@ devtools::install_github("dclarkboucher/hdmed")
 
 ## Example
 
-To demonstrate high-dimensional mediation analysis with an example, let 
-$\mathbf{M}$ be a set of $p$ variables, each a potential mediator in the causal
-pathway between exposure $A$ and outcome $Y$, and let $\mathbb{C}$ be a set
-of $q$ covariates, $q$ reasonably small. Then, given data on individuals
-$i\in\{1,\dots,n\}$, with $n$ potentially but not necessarily less than $p$, we 
-can evaluate the mediating role of $M$ with the models
+To demonstrate high-dimensional mediation analysis with an example, let $A$ be
+an exposure, $Y$ an outcome, $\mathbf{C}$ a set of $q$ covariates, and 
+$\mathbf{M}$ a set of $p$ potential mediators in the causal pathway between $A$
+and $Y$. Then, supposing we have data on $n$ individuals, we can evaluate the
+mediating role of $\mathbf{M}$ with the equations
 
-\begin{equation}
+
+\begin{align}
 A = B
-\end{equation}
+\end{align}
 
 
 ```{r example}
