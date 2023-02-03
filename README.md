@@ -37,16 +37,16 @@ equations
 
 $$
 \begin{equation}
-E[\mathbf{Y_i}|A_i,\mathbf{M}_i,\mathbf{C_i}] = \beta_aA_i+\mathbf{\beta_m}^T\mathbf{M_i} + \mathbf{\beta_c}^T\mathbf{C_i} 
+E[Y_i|A_i,\mathbf{M}_i,\mathbf{C_i}] = \beta_aA_i+\mathbf{\beta_m}^T\mathbf{M_i} + \mathbf{\beta_c}^T\mathbf{C_i} 
 \end{equation}
 $$
 
 and
 
 $$
-\begin{gather}
-E[\mathbf{Y_i}|A_i,\mathbf{M}_i,\mathbf{C_i}] = \beta_aA_i+\mathbf{\beta_m}^T\mathbf{M_i} + \mathbf{\beta_c}^T\mathbf{C_i} 
-\end{gather}
+\begin{equation}
+E[\mathbf{M_i}|A_i,\mathbf{C_i}] =\mathbf{\alpha_a}A_i + \mathbf{\alpha_c}\mathbf{C_i} 
+\end{equation}
 $$
 
 ``` r
