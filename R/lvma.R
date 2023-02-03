@@ -62,7 +62,7 @@
 #' Derkach, A., Pfeiffer, R. M., Chen, T.-H. & Sampson, J. N. High dimensional
 #' mediation analysis with latent variables. Biometrics 75, 745–756 (2019).
 #'
-#' @source \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8811931/}
+#' @source \url{https://pubmed.ncbi.nlm.nih.gov/30859548/}
 #'
 #' @examples
 #' A <- med_dat$A

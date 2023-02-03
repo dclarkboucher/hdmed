@@ -68,12 +68,12 @@
 #'
 #' @examples
 #' A <- med_dat$A
-#' M <- med_dat$M
+#' M <- med_dat$M[,1:8]
 #' Y <- med_dat$Y
 #' # fit pathway LASSO for two tuning parameters and retrieve their fits
-#' out <- mediate_plasso(A, M, Y, lambdas = c(10^-3, 10^-2))
-#' utils::head(out$all_fits$lambda1)
-#' utils::head(out$all_fits$lambda2)
+#' out <- mediate_plasso(A, M, Y, lambdas = c(10^-3, 10^-2), tol = 1e-4)
+#' head(out$all_fits$lambda1)
+#' head(out$all_fits$lambda2)
 #'
 #'
 #' @export

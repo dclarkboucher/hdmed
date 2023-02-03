@@ -4,7 +4,7 @@
 \alias{mediate_lvma}
 \title{Latent Variable Mediation Analysis}
 \source{
-\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8811931/}
+\url{https://pubmed.ncbi.nlm.nih.gov/30859548/}
 }
 \usage{
 mediate_lvma(A, M, Y, q, rhoLM, rhoEL, rhoLY, scale = T, imax = 5000)

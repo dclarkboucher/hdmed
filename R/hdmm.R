@@ -64,12 +64,11 @@
 #' @export
 #'
 #' @examples
-#' A <- med_dat$A
-#' M <- med_dat$M
-#' Y <- med_dat$Y
+#' A <- as.numeric(scale(med_dat$A)) # can help to standardize
+#' M <- scale(med_dat$M[,1:8])
+#' Y <- as.numeric(scale(med_dat$Y))
 #'
-#' # apply HDMM with the first 5 mediators (for efficiency)
-#' out <- mediate_hdmm(A, M[,1:5], Y, sims = 50)
+#' out <- mediate_hdmm(A, M, Y, sims = 5, tol = 10^-3, imax = 50)
 #' out$effects
 #'
 

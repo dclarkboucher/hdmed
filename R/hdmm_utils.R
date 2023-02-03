@@ -1,9 +1,11 @@
+
+
 PDM_1 =function(x,y,m,imax, tol, theta=theta, w1=w1, interval = interval, step = step)  {
 
   I=diag(length(w1))
 
-  f=function(lambda,psi,phi){
-    crossprod(solve(lambda*I + psi) %*% phi) - 1
+  f=function(lambda1,psi,phi){
+    crossprod(solve(lambda1*I + psi) %*% phi) - 1
   }
 
   #negative log
@@ -14,6 +16,7 @@ PDM_1 =function(x,y,m,imax, tol, theta=theta, w1=w1, interval = interval, step =
   g12=function(x,y,m,theta,w1,s1,s2){
     crossprod(m%*%w1-theta[1]-x*theta[2]) / (1/s2^2)
   }
+
 
   count=0
 
@@ -34,11 +37,6 @@ PDM_1 =function(x,y,m,imax, tol, theta=theta, w1=w1, interval = interval, step =
     phi=as.numeric(1/s1^2)*crossprod(m, y-theta[3]-x*theta[5])*theta[4]
     +as.numeric(1/s2^2)*crossprod(m, theta[1] + x*theta[2])
 
-
-    ################################################################
-    ################################################################
-
-
     grid = round(2*interval/step)
 
 
@@ -46,29 +44,21 @@ PDM_1 =function(x,y,m,imax, tol, theta=theta, w1=w1, interval = interval, step =
 
 
     for (i in 1 : (step + 1) ) {
-
       temp[i]=f(- (interval + grid ) + grid*i, psi = psi, phi = phi)
     }
 
 
-    ################################################################
-    ################################################################
-
-
     for (i in 1: step ){
-
-
       if ((temp[i]*temp[i+1])<0){
         l= - (interval + grid ) + grid*i
         h= - (interval + grid ) + grid*(i+1)
-
       }
     }
 
 
-    tryCatch({
-      lambda = uniroot(f, c(l, h), phi = phi, psi = psi) $ root
-    }, error=function(e){})
+
+    lambda = uniroot(f, c(l, h), phi = phi, psi = psi)$root
+
 
     w1_new=solve(lambda*I+psi)%*%phi
 
