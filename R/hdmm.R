@@ -67,7 +67,9 @@
 #' A <- med_dat$A
 #' M <- med_dat$M
 #' Y <- med_dat$Y
-#' out <- mediate_hdmm(A, M, Y, sims = 50)
+#'
+#' # apply HDMM with the first 5 mediators (for efficiency)
+#' out <- mediate_hdmm(A, M[,1:5], Y, sims = 50)
 #' out$effects
 #'
 
