@@ -26,11 +26,11 @@ You can install the development version of hdmed from
 devtools::install_github("dclarkboucher/hdmed")
 ```
 
-## Example
+## Overview
 
-To demonstrate high-dimensional mediation analysis with an example, let
-$A$ be an exposure, $Y$ an outcome, $\mathbf{C}$ a set of $q$
-covariates, and $\mathbf{M}$ a set of $p$ potential mediators in the
+To see how high-dimensional mediation analysis works mathematically, let
+$A$ be an exposure, $Y$ be an outcome, $\mathbf{C}$ be a set of $q$
+covariates, and $\mathbf{M}$ be a set of $p$ potential mediators in the
 causal pathway between $A$ and $Y$. Then, supposing we have data on $n$
 individuals, we can evaluate the mediating role of $\mathbf{M}$ with the
 equations
@@ -45,31 +45,126 @@ and
 
 $$
 \begin{equation}
-E[\mathbf{M_i}|A_i,\mathbf{C_i}] =\mathbf{\alpha_a}A_i + \mathbf{\alpha_c}\mathbf{C_i} 
+E[\mathbf{M_i}|A_i,\mathbf{C_i}] =\mathbf{\alpha_a}A_i + \mathbf{\alpha_c}\mathbf{C_i}\text{,}
 \end{equation}
-$$
+$$ where the first equation is the “outcome model” and the second
+equation is the “mediator model.” In the outcome model, our primary
+estimands are $\beta_a$, the direct effect of the exposure on the
+outcome independent of $\mathbf{M}$, and $\mathbf{\beta_m}$, a
+$p$-vector of the association between each mediator and $Y$ conditional
+on $A$ and $\mathbf{C}$. (Unlike many methods common to single-mediator
+analysis, all the methods included in our package assume there is no
+interaction effect between $\mathbf{M}$ and $A$ on $Y$.) With respect to
+the mediator model, our primary estimand is $\mathbf{\alpha_a}$, a
+$p$-vector of the associations between each mediator and the exposure,
+conditional $\mathbf{C}$. Our chief interest in performing mediation is
+typically to obtain estimates of $\mathbf{\alpha_a}^T \mathbf{\beta_m}$,
+the *global mediation effect*, $\beta_a$, the *direct effect*, and
+$\frac{\mathbf{\alpha_a}^T \mathbf{\beta_m}}{\mathbf{\alpha_a}^T \mathbf{\beta_m}+\beta_a}$,
+the proportion of the total effect of $A$ on $Y$ due to mediation
+(referred to as the *proportion mediated*). As for the other
+coefficients, $\mathbf{\beta_c}$ is a $q$-vector of the
+covariate-outcome effects, and $\mathbf{alpha_c}$ is a $p\times q$
+matrix of covariate-mediator associations.
+
+All the provided methods are capable of fitting this model in some
+capacity, with exception of HDMM (`mediate_hdmm`) and LVMA
+(`mediate_lvma`), which are based on latent variables. (See the
+documentation of those functions for more detail.) The others at the
+very least produce estimates of $\beta_a$,
+$\mathbf{\alpha_a}^T \mathbf{\beta_m}$, and the total effect
+$\mathbf{\alpha_a}^T \mathbf{\beta_m}+\beta_a$. In the case of BSLMM
+(`mediate_bslmm`), HIMA (`mediate_hima`), HDMA (`mediate_hdma`), MedFix
+(`mediate_medfix`), and Pathaway LASSO (`mediate_pathway_lasso`), we
+also report estimates of the *mediation contributions*, which are the
+contributions $(\mathbf{\alpha_a})_j(\mathbf{\beta_m})_j$ of each
+mediator to $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, $j$ from $1$ to $p$.
+Though useful for identifying potentially important mediators, we stress
+that these contributions *generally cannot be interpreted as causal
+effects unless the mediators are* *independent conditional on $A$ and
+$\mathbf{C}$*. Conditions for when
+$\mathbf{\alpha_a}^T \mathbf{\beta_m}$ and $\beta_a$ can be interpreted
+causally are laid out Song et al. (2019) (see `mediate_bslmm` for
+complete reference). Note also that, as programmed, the methods HIMA
+(`mediate_hima`), HDMA (`mediate_hdma`), MedFix (`mediate_medfix`), and
+BSLMM allow one to incorporate a small number of covariates directly, as
+specified in the above pair of models, whereas the other methods are do
+not. If you are interested in adjusting for covariates with a method
+that does not allow them to be inputted to our mediation function,
+consider regressing those covariates out of the outcome, mediators, and
+exposures in advance, when appropriate. In addition, most functions in
+our package assume that the outcome variable is continuous; however,
+HIMA and HDMA have options for fitting a binary outcome model with a
+standard logistic link.
+
+## Example
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The `med_dat` object provided by our package contains a simple toy
+dataset for practicing high-dimensional mediation (though in this case,
+we are using “high-dimensional” generously, as the dataset has only 20
+mediators). Let us take a look at the data.
 
 ``` r
 library(hdmed)
-## basic example code
+
+# Process data
+Y <- med_dat$Y
+M <- med_dat$M
+A <- med_dat$A
+
+summary(M[,1:4])
+#>        m1                 m2                 m3                 m4          
+#>  Min.   :-2.29953   Min.   :-2.84665   Min.   :-2.57881   Min.   :-3.01544  
+#>  1st Qu.:-0.67778   1st Qu.:-0.59049   1st Qu.:-0.56711   1st Qu.:-0.80756  
+#>  Median :-0.09671   Median : 0.09919   Median :-0.06524   Median :-0.18213  
+#>  Mean   :-0.01019   Mean   : 0.03058   Mean   : 0.03000   Mean   :-0.09589  
+#>  3rd Qu.: 0.57186   3rd Qu.: 0.67327   3rd Qu.: 0.71236   3rd Qu.: 0.61887  
+#>  Max.   : 2.48965   Max.   : 2.52672   Max.   : 1.90676   Max.   : 3.64529
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+Now we will perform mediation analysis. For a simple, fast mediation
+method we will use the method “high-dimensional mediation analysis” by
+Zhang et al. (2016), which we call “HIMA”. It’s a straightforward method
+that fits the mediator models using ordinary least squares and the
+outcome model using penalized regression with the minimax concave
+penalty. We don’t have covariates to include, so to use the default
+options, we only need to input our $A$, $\mathbf{M}$, and $Y$.
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+hima_out <- mediate_hima(A, M, Y)
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
+Next let’s look at the mediation contributions, which are located in the
+`contributions` table In this case, only one mediator was returned,
+which happens if the others have an estimated contribution of zero,
+meaning they do not contribute to the estimated global mediation effect.
+Examining the table further, we see `alpha` as a shorthand for
+$(\mathbf{\alpha_a})_j$, `beta` as a shorthand for
+$(\mathbf{\beta_m})_j$, and `alpha_beta` as a shorthand for
+$(\mathbf{\alpha_a})_j(\mathbf{\beta_m})_j$. Notice that `ab_pv` is the
+$(\mathbf{\alpha_a})_j(\mathbf{\beta_m})_j$ p-value.
+
+``` r
+hima_out$contributions
+#>   mediator      alpha   alpha_pv      beta      beta_pv alpha_beta      ab_pv
+#> 1       m3 -0.2737383 0.01438887 0.6040214 1.364285e-07 -0.1653438 0.01438887
+```
+
+Finally, the estimated mediation effects are reported in `effects`
+table, which includes the indirect effect (the global mediation effect),
+the direct effect, and the total effect. In theory, one can use these
+estimates to report the proportion mediated, as described above, but
+since the proportion mediated is generally useful when
+$\mathbf{\alpha_a}^T \mathbf{\beta_m}$ and $beta_m$ have the same sign,
+we will not do so here.
+
+``` r
+hima_out$effects
+#>     effect    estimate
+#> 1 indirect -0.16534380
+#> 2   direct  0.01018211
+#> 3    total -0.15516169
+```
