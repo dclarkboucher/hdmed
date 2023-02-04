@@ -47,19 +47,21 @@ $$
 \begin{equation}
 E[\mathbf{M_i}|A_i,\mathbf{C_i}] =\mathbf{\alpha_a}A_i + \mathbf{\alpha_c}\mathbf{C_i}\text{,}
 \end{equation}
-$$ where the first equation is the “outcome model” and the second
-equation is the “mediator model.” In the outcome model, our primary
-estimands are $\beta_a$, the direct effect of the exposure on the
-outcome independent of $\mathbf{M}$, and $\mathbf{\beta_m}$, a
-$p$-vector of the association between each mediator and $Y$ conditional
-on $A$ and $\mathbf{C}$. (Unlike many methods common to single-mediator
-analysis, all the methods included in our package assume there is no
-interaction effect between $\mathbf{M}$ and $A$ on $Y$.) With respect to
-the mediator model, our primary estimand is $\mathbf{\alpha_a}$, a
-$p$-vector of the associations between each mediator and the exposure,
-conditional $\mathbf{C}$. Our chief interest in performing mediation is
-typically to obtain estimates of $\mathbf{\alpha_a}^T \mathbf{\beta_m}$,
-the *global mediation effect*, $\beta_a$, the *direct effect*, and
+$$
+
+where the first equation is the “outcome model” and the second equation
+is the “mediator model.” In the outcome model, our primary estimands are
+$\beta_a$, the direct effect of the exposure on the outcome independent
+of $\mathbf{M}$, and $\mathbf{\beta_m}$, a $p$-vector of the association
+between each mediator and $Y$ conditional on $A$ and $\mathbf{C}$.
+(Unlike many methods common to single-mediator analysis, all the methods
+included in our package assume there is no interaction effect between
+$\mathbf{M}$ and $A$ on $Y$.) With respect to the mediator model, our
+primary estimand is $\mathbf{\alpha_a}$, a $p$-vector of the
+associations between each mediator and the exposure, conditional
+$\mathbf{C}$. Our chief interest in performing mediation is typically to
+obtain estimates of $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, the *global
+mediation effect*, $\beta_a$, the *direct effect*, and
 $\frac{\mathbf{\alpha_a}^T \mathbf{\beta_m}}{\mathbf{\alpha_a}^T \mathbf{\beta_m}+\beta_a}$,
 the proportion of the total effect of $A$ on $Y$ due to mediation
 (referred to as the *proportion mediated*). As for the other
@@ -104,8 +106,11 @@ standard logistic link.
 
 The `med_dat` object provided by our package contains a simple toy
 dataset for practicing high-dimensional mediation (though in this case,
-we are using “high-dimensional” generously, as the dataset has only 20
-mediators). Let us take a look at the data.
+we are using “high-dimensional” generously, as the dataset contains only
+20 mediators to its 100 observations).
+
+Let us take a look at the data. In `Y` we have the outcome, in `A` we
+have the exposure, and in `M` we have a named matrix of mediators.
 
 ``` r
 library(hdmed)
@@ -115,14 +120,11 @@ Y <- med_dat$Y
 M <- med_dat$M
 A <- med_dat$A
 
-summary(M[,1:4])
-#>        m1                 m2                 m3                 m4          
-#>  Min.   :-2.29953   Min.   :-2.84665   Min.   :-2.57881   Min.   :-3.01544  
-#>  1st Qu.:-0.67778   1st Qu.:-0.59049   1st Qu.:-0.56711   1st Qu.:-0.80756  
-#>  Median :-0.09671   Median : 0.09919   Median :-0.06524   Median :-0.18213  
-#>  Mean   :-0.01019   Mean   : 0.03058   Mean   : 0.03000   Mean   :-0.09589  
-#>  3rd Qu.: 0.57186   3rd Qu.: 0.67327   3rd Qu.: 0.71236   3rd Qu.: 0.61887  
-#>  Max.   : 2.48965   Max.   : 2.52672   Max.   : 1.90676   Max.   : 3.64529
+str(M)
+#>  num [1:100, 1:20] -0.491 1.339 -0.194 -0.218 -0.108 ...
+#>  - attr(*, "dimnames")=List of 2
+#>   ..$ : NULL
+#>   ..$ : chr [1:20] "m1" "m2" "m3" "m4" ...
 ```
 
 Now we will perform mediation analysis. For a simple, fast mediation

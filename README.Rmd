@@ -56,6 +56,7 @@ $$
 E[\mathbf{M_i}|A_i,\mathbf{C_i}] =\mathbf{\alpha_a}A_i + \mathbf{\alpha_c}\mathbf{C_i}\text{,}
 \end{equation}
 $$
+
 where the first equation is the "outcome model" and the second equation is the
 "mediator model." In the outcome model, our primary estimands are $\beta_a$, 
 the direct effect of the exposure on the outcome independent of $\mathbf{M}$, 
@@ -110,8 +111,11 @@ link.
 
 The `med_dat` object provided by our package contains a simple toy dataset for
 practicing high-dimensional mediation (though in this case, we are using 
-"high-dimensional" generously, as the dataset has only 20 mediators). Let us
-take a look at the data.
+"high-dimensional" generously, as the dataset contains only 20 mediators to its
+100 observations). 
+
+Let us take a look at the data. In `Y` we have the outcome, in `A` we have the
+exposure, and in `M` we have a named matrix of mediators. 
 
 ```{r example}
 library(hdmed)
@@ -121,7 +125,7 @@ Y <- med_dat$Y
 M <- med_dat$M
 A <- med_dat$A
 
-summary(M[,1:4])
+str(M)
 
 ```
 
