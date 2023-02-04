@@ -59,7 +59,7 @@ included in our package assume there is no interaction effect between
 $\mathbf{M}$ and $A$ on $Y$.) With respect to the mediator model, our
 primary estimand is $\mathbf{\alpha_a}$, a $p$-vector of the
 associations between each mediator and the exposure, conditional
-$\mathbf{C}$. Our chief interest in performing mediation is typically to
+$\mathbf{C}$. Our chief interest in assessing mediation is typically to
 obtain estimates of $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, the *global
 mediation effect*, $\beta_a$, the *direct effect*, and
 $\frac{\mathbf{\alpha_a}^T \mathbf{\beta_m}}{\mathbf{\alpha_a}^T \mathbf{\beta_m}+\beta_a}$,
@@ -83,10 +83,10 @@ contributions $(\mathbf{\alpha_a})_j(\mathbf{\beta_m})_j$ of each
 mediator to $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, $j$ from $1$ to $p$.
 Though useful for identifying potentially important mediators, we stress
 that these contributions *generally cannot be interpreted as causal
-effects unless the mediators are* *independent conditional on $A$ and
-$\mathbf{C}$*. Conditions for when
+effects unless the mediators are* *independent conditional on *$A$\* and
+\*$\mathbf{C}$. Conditions for when
 $\mathbf{\alpha_a}^T \mathbf{\beta_m}$ and $\beta_a$ can be interpreted
-causally are laid out Song et al. (2019) (see `mediate_bslmm` for
+causally are laid out by Song et al. (2019) (see `mediate_bslmm` for
 complete reference). Note also that, as programmed, the methods HIMA
 (`mediate_hima`), HDMA (`mediate_hdma`), MedFix (`mediate_medfix`), and
 BSLMM allow one to incorporate a small number of covariates directly, as
@@ -133,7 +133,7 @@ Zhang et al. (2016), which we call “HIMA”. It’s a straightforward method
 that fits the mediator models using ordinary least squares and the
 outcome model using penalized regression with the minimax concave
 penalty. We don’t have covariates to include, so to use the default
-options, we only need to input our $A$, $\mathbf{M}$, and $Y$.
+options, we input only `A`, `M`, and `Y`.
 
 ``` r
 hima_out <- mediate_hima(A, M, Y)
@@ -159,7 +159,7 @@ Finally, the estimated mediation effects are reported in `effects`
 table, which includes the indirect effect (the global mediation effect),
 the direct effect, and the total effect. In theory, one can use these
 estimates to report the proportion mediated, as described above, but
-since the proportion mediated is generally useful when
+since the proportion mediated is generally only useful when
 $\mathbf{\alpha_a}^T \mathbf{\beta_m}$ and $beta_m$ have the same sign,
 we will not do so here.
 

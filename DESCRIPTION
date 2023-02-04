@@ -1,7 +1,15 @@
 Package: hdmed
 Title: Methods for Mediation Analysis with High-Dimensional Mediators
 Version: 1.0
-Author: Dylan Clark-Boucher
+Authors@R:
+    c(person(given = "Dylan",
+           family = "Clark-Boucher",
+           role = c("aut", "cre"),
+           email = "dclarkboucher@fas.harvard.edu"),
+      person(given = "Mike",
+           family = "Kleinsasser",
+           role = c("aut"),
+           email = "mkleinsa@umich.edu"))
 Maintainer: Dylan Clark-Boucher <dclarkboucher@fas.harvard.edu>
 Description: A suite of functions for performing mediation
     analysis when the mediators are high-dimensional. In addition to 
