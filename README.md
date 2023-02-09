@@ -18,8 +18,7 @@ of prolific and exciting methodological work.
 
 ## Installation
 
-You can install the development version of hdmed from
-[GitHub](https://github.com/) with:
+You can install hdmed from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -70,10 +69,10 @@ covariate-outcome effects, and $\mathbf{alpha_c}$ is a $p\times q$
 matrix of covariate-mediator associations.
 
 All the provided methods are capable of fitting this model in some
-capacity, with exception of HDMM (`mediate_hdmm`) and LVMA
+capacity with exception of HDMM (`mediate_hdmm`) and LVMA
 (`mediate_lvma`), which are based on latent variables. (See the
-documentation of those functions for more detail.) The others at the
-very least produce estimates of $\beta_a$,
+documentation of those functions for more detail.) The others produce,
+at the very least, estimates of $\beta_a$,
 $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, and the total effect
 $\mathbf{\alpha_a}^T \mathbf{\beta_m}+\beta_a$. In the case of BSLMM
 (`mediate_bslmm`), HIMA (`mediate_hima`), HDMA (`mediate_hdma`), MedFix
@@ -83,7 +82,7 @@ contributions $(\mathbf{\alpha_a})_j(\mathbf{\beta_m})_j$ of each
 mediator to $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, $j$ from $1$ to $p$.
 Though useful for identifying potentially important mediators, we stress
 that these contributions *generally cannot be interpreted as causal
-effects unless the mediators are* *independent conditional on *$A$ *and*
+effects unless the mediators are* *independent conditional on* $A$ *and*
 $\mathbf{C}$. Conditions for when $\mathbf{\alpha_a}^T \mathbf{\beta_m}$
 and $\beta_a$ can be interpreted causally are laid out by Song et
 al. (2019) (see `mediate_bslmm` for complete reference). Note also that,
