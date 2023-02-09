@@ -83,21 +83,20 @@ contributions $(\mathbf{\alpha_a})_j(\mathbf{\beta_m})_j$ of each
 mediator to $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, $j$ from $1$ to $p$.
 Though useful for identifying potentially important mediators, we stress
 that these contributions *generally cannot be interpreted as causal
-effects unless the mediators are* *independent conditional on *$A$\* and
-\*$\mathbf{C}$. Conditions for when
-$\mathbf{\alpha_a}^T \mathbf{\beta_m}$ and $\beta_a$ can be interpreted
-causally are laid out by Song et al. (2019) (see `mediate_bslmm` for
-complete reference). Note also that, as programmed, the methods HIMA
-(`mediate_hima`), HDMA (`mediate_hdma`), MedFix (`mediate_medfix`), and
-BSLMM allow one to incorporate a small number of covariates directly, as
-specified in the above pair of models, whereas the other methods are do
-not. If you are interested in adjusting for covariates with a method
-that does not allow them to be inputted to our mediation function,
-consider regressing those covariates out of the outcome, mediators, and
-exposures in advance, when appropriate. In addition, most functions in
-our package assume that the outcome variable is continuous; however,
-HIMA and HDMA have options for fitting a binary outcome model with a
-standard logistic link.
+effects unless the mediators are* *independent conditional on *$A$ *and*
+$\mathbf{C}$. Conditions for when $\mathbf{\alpha_a}^T \mathbf{\beta_m}$
+and $\beta_a$ can be interpreted causally are laid out by Song et
+al. (2019) (see `mediate_bslmm` for complete reference). Note also that,
+as programmed, the methods HIMA (`mediate_hima`), HDMA (`mediate_hdma`),
+MedFix (`mediate_medfix`), and BSLMM allow one to incorporate a small
+number of covariates directly, as specified in the above pair of models,
+whereas the other methods are do not. If you are interested in adjusting
+for covariates with a method that does not allow them to be inputted to
+our mediation function, consider regressing those covariates out of the
+outcome, mediators, and exposures in advance, when appropriate. In
+addition, most functions in our package assume that the outcome variable
+is continuous; however, HIMA and HDMA have options for fitting a binary
+outcome model with a standard logistic link.
 
 ## Example
 

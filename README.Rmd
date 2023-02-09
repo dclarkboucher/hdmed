@@ -90,7 +90,7 @@ $(\mathbf{\alpha_a})_j(\mathbf{\beta_m})_j$ of each mediator to
 $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, $j$ from $1$ to $p$. Though useful for
 identifying potentially important mediators, we stress that these contributions
 *generally cannot be interpreted as causal effects unless the mediators are*
-*independent conditional on *$A$* and *$\mathbf{C}$. Conditions for when 
+*independent conditional on *$A$ *and* $\mathbf{C}$. Conditions for when 
 $\mathbf{\alpha_a}^T \mathbf{\beta_m}$ and $\beta_a$ can be interpreted causally
 are laid out by Song et al. (2019) (see `mediate_bslmm` for complete reference).
 Note also that, as programmed, the methods HIMA (`mediate_hima`), HDMA 
