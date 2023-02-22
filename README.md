@@ -58,14 +58,14 @@ included in our package assume there is no interaction effect between
 $\mathbf{M}$ and $A$ on $Y$.) With respect to the mediator model, our
 primary estimand is $\mathbf{\alpha_a}$, a $p$-vector of the
 associations between each mediator and the exposure, conditional
-$\mathbf{C}$. Our chief interest in assessing mediation is typically to
-obtain estimates of $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, the *global
-mediation effect*, $\beta_a$, the *direct effect*, and
+on$\mathbf{C}$. Our chief interest in assessing mediation is typically
+to obtain estimates of $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, the
+*global mediation effect*, $\beta_a$, the *direct effect*, and
 $\frac{\mathbf{\alpha_a}^T \mathbf{\beta_m}}{\mathbf{\alpha_a}^T \mathbf{\beta_m}+\beta_a}$,
 the proportion of the total effect of $A$ on $Y$ due to mediation
 (referred to as the *proportion mediated*). As for the other
 coefficients, $\mathbf{\beta_c}$ is a $q$-vector of the
-covariate-outcome effects, and $\mathbf{alpha_c}$ is a $p\times q$
+covariate-outcome effects, and $\mathbf{\alpha_c}$ is a $p\times q$
 matrix of covariate-mediator associations.
 
 All the provided methods are capable of fitting this model in some
@@ -127,9 +127,9 @@ str(M)
 
 Now we will perform mediation analysis. For a simple, fast mediation
 method we will use the method “high-dimensional mediation analysis” by
-Zhang et al. (2016), which we call “HIMA”. It’s a straightforward method
-that fits the mediator models using ordinary least squares and the
-outcome model using penalized regression with the minimax concave
+Zhang et al. (2016), which we call “HIMA”. HIMA is a straightforward
+method that fits the mediator models using ordinary least squares and
+the outcome model using penalized regression with the minimax concave
 penalty. We don’t have covariates to include, so to use the default
 options, we input only `A`, `M`, and `Y`.
 
@@ -138,9 +138,9 @@ hima_out <- mediate_hima(A, M, Y)
 ```
 
 Next let’s look at the mediation contributions, which are located in the
-`contributions` table In this case, only one mediator was returned,
-which happens if the others have an estimated contribution of zero,
-meaning they do not contribute to the estimated global mediation effect.
+`contributions` table. In this case, the function only returned one
+mediator, which happens if the others have an estimated contribution of
+zero and do not contribute to the estimated global mediation effect.
 Examining the table further, we see `alpha` as a shorthand for
 $(\mathbf{\alpha_a})_j$, `beta` as a shorthand for
 $(\mathbf{\beta_m})_j$, and `alpha_beta` as a shorthand for
