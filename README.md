@@ -190,6 +190,6 @@ Choices and Comparison.” To give our work proper credit, use the
 citation provided below:
 
 > Dylan Clark-Boucher, Xiang Zhou, Jiacong Du, Yongmei Liu, Belinda L
-> Needham, Jennifer A Smith, Bhramar \>Mukherjee (2023). Methods for
+> Needham, Jennifer A Smith, Bhramar Mukherjee (2023). Methods for
 > Mediation Analysis with High-Dimensional DNA Methylation Data:
-> Possible \>Choices and Comparison. medRxiv 2023.02.10.23285764
+> Possible Choices and Comparison. medRxiv 2023.02.10.23285764
