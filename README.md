@@ -72,12 +72,12 @@ chief quantities of interest are:
 
 2.  $\beta_a$, the **direct effect** of $A$ on $Y$;
 
-3.  $\mathbf{\alpha_a}^T \mathbf{\beta_m} + \beta_a$, the total affect
-    of $A$ on $Y$; and
+3.  $\mathbf{\alpha_a}^T \mathbf{\beta_m} + \beta_a$, the **total
+    effect** of $A$ on $Y$; and
 
 4.  $\frac{\mathbf{\alpha_a}^T \mathbf{\beta_m}}{\mathbf{\alpha_a}^T \mathbf{\beta_m}+\beta_a}$,
     the proportion of the total effect due to mediation (referred to as
-    the *proportion mediated*.)
+    the **proportion mediated**.)
 
 All the methods provided by our package can fit this model except for
 HDMM (`mediate_hdmm`) and LVMA (`mediate_lvma`), which instead of the
