@@ -64,8 +64,8 @@ $\mathbf{\alpha_c}$ is a $p\times q$ matrix of covariate-mediator
 associations.
 
 Once the outcome and mediator models have been fitted, mediation
-analysis is performed by assessing their estimated coefficients. The
-chief quantities of interest include:
+analysis can be performed by assessing their estimated coefficients. The
+chief quantities of interest are:
 
 1.  $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, the **global mediation
     effect** of $A$ on $Y$ through $M$;
@@ -189,7 +189,7 @@ Mediation Analysis with High-Dimensional DNA Methylation Data: Possible
 Choices and Comparison.” To give our work proper credit, use the
 citation provided below:
 
-Dylan Clark-Boucher, Xiang Zhou, Jiacong Du, Yongmei Liu, Belinda L
-Needham, Jennifer A Smith, Bhramar Mukherjee (2023). Methods for
-Mediation Analysis with High-Dimensional DNA Methylation Data: Possible
-Choices and Comparison. medRxiv 2023.02.10.23285764
+> Dylan Clark-Boucher, Xiang Zhou, Jiacong Du, Yongmei Liu, Belinda L
+> Needham, Jennifer A Smith, Bhramar \>Mukherjee (2023). Methods for
+> Mediation Analysis with High-Dimensional DNA Methylation Data:
+> Possible \>Choices and Comparison. medRxiv 2023.02.10.23285764
