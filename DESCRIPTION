@@ -50,5 +50,5 @@ Imports:
     MASS (>= 7.3.58.1),
     mediation (>= 4.5.0),
     ncvreg (>= 3.13.0),
-    stats (>= 4.2.2),
-    utils (>= 4.2.2)
+    stats,
+    utils

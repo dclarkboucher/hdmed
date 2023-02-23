@@ -48,36 +48,48 @@ E[\mathbf{M_i}|A_i,\mathbf{C_i}] =\mathbf{\alpha_a}A_i + \mathbf{\alpha_c}\mathb
 \end{equation}
 $$
 
-where the first equation is the “outcome model” and the second equation
-is the “mediator model.” In the outcome model, our primary estimands are
-$\beta_a$, the direct effect of the exposure on the outcome independent
-of $\mathbf{M}$, and $\mathbf{\beta_m}$, a $p$-vector of the association
-between each mediator and $Y$ conditional on $A$ and $\mathbf{C}$.
-(Unlike many methods common to single-mediator analysis, all the methods
-included in our package assume there is no interaction effect between
-$\mathbf{M}$ and $A$ on $Y$.) With respect to the mediator model, our
-primary estimand is $\mathbf{\alpha_a}$, a $p$-vector of the
-associations between each mediator and the exposure, conditional
-on$\mathbf{C}$. Our chief interest in assessing mediation is typically
-to obtain estimates of $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, the
-*global mediation effect*, $\beta_a$, the *direct effect*, and
-$\frac{\mathbf{\alpha_a}^T \mathbf{\beta_m}}{\mathbf{\alpha_a}^T \mathbf{\beta_m}+\beta_a}$,
-the proportion of the total effect of $A$ on $Y$ due to mediation
-(referred to as the *proportion mediated*). As for the other
-coefficients, $\mathbf{\beta_c}$ is a $q$-vector of the
-covariate-outcome effects, and $\mathbf{\alpha_c}$ is a $p\times q$
-matrix of covariate-mediator associations.
+where the first equation is the **outcome model** and the second
+equation is the **mediator model**. In the outcome model, our primary
+estimands are $\beta_a$— the direct effect of the exposure on the
+outcome independent of $\mathbf{M}$— and $\mathbf{\beta_m}$, a
+$p$-vector of the association between each mediator and $Y$ given $A$
+and $\mathbf{C}$. (Unlike many methods common to single-mediator
+analysis, all the methods included in our package assume there is no
+interaction effect between $\mathbf{M}$ and $A$ on $Y$.) Likewise, our
+primary concern in the mediator model is $\mathbf{\alpha_a}$, which is a
+$p$-vector of the conditional associations between each mediator and the
+exposure given $\mathbf{C}$. As for the other coefficients,
+$\mathbf{\beta_c}$ is a $q$-vector of the covariate-outcome effects, and
+$\mathbf{\alpha_c}$ is a $p\times q$ matrix of covariate-mediator
+associations.
 
-All the provided methods are capable of fitting this model in some
-capacity with exception of HDMM (`mediate_hdmm`) and LVMA
-(`mediate_lvma`), which are based on latent variables. (See the
-documentation of those functions for more detail.) The others produce,
-at the very least, estimates of $\beta_a$,
-$\mathbf{\alpha_a}^T \mathbf{\beta_m}$, and the total effect
-$\mathbf{\alpha_a}^T \mathbf{\beta_m}+\beta_a$. In the case of BSLMM
+Once the outcome and mediator models have been fitted, mediation
+analysis is performed by assessing their estimated coefficients. The
+chief quantities of interest include:
+
+1.  $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, the **global mediation
+    effect** of $A$ on $Y$ through $M$;
+
+2.  $\beta_a$, the **direct effect** of $A$ on $Y$;
+
+3.  $\mathbf{\alpha_a}^T \mathbf{\beta_m} + \beta_a$, the total affect
+    of $A$ on $Y$; and
+
+4.  $\frac{\mathbf{\alpha_a}^T \mathbf{\beta_m}}{\mathbf{\alpha_a}^T \mathbf{\beta_m}+\beta_a}$,
+    the proportion of the total effect due to mediation (referred to as
+    the *proportion mediated*.)
+
+All the methods provided by our package can fit this model except for
+HDMM (`mediate_hdmm`) and LVMA (`mediate_lvma`), which instead of the
+typical model assumptions, assume the mediation between $A$ and $Y$ is
+transmitted by unmeasured latent variables. (See the documentation of
+those functions for more detail.) The other methods produce, at the very
+least, estimates of the direct effect, global mediation effect, and
+total effect, making them suitable for performing mediation analysis
+with the standard assumptions. Moreover, in the case of BSLMM
 (`mediate_bslmm`), HIMA (`mediate_hima`), HDMA (`mediate_hdma`), MedFix
 (`mediate_medfix`), and Pathaway LASSO (`mediate_pathway_lasso`), we
-also report estimates of the *mediation contributions*, which are the
+also report estimates of the **mediation contributions**, which are the
 contributions $(\mathbf{\alpha_a})_j(\mathbf{\beta_m})_j$ of each
 mediator to $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, $j$ from $1$ to $p$.
 Though useful for identifying potentially important mediators, we stress
@@ -89,13 +101,14 @@ al. (2019) (see `mediate_bslmm` for complete reference). Note also that,
 as programmed, the methods HIMA (`mediate_hima`), HDMA (`mediate_hdma`),
 MedFix (`mediate_medfix`), and BSLMM allow one to incorporate a small
 number of covariates directly, as specified in the above pair of models,
-whereas the other methods are do not. If you are interested in adjusting
-for covariates with a method that does not allow them to be inputted to
-our mediation function, consider regressing those covariates out of the
-outcome, mediators, and exposures in advance, when appropriate. In
-addition, most functions in our package assume that the outcome variable
-is continuous; however, HIMA and HDMA have options for fitting a binary
-outcome model with a standard logistic link.
+whereas the other as programmed methods do not. If you are interested in
+adjusting for covariates with a method that does not allow them to be
+inputted to our mediation function directly, consider regressing those
+covariates out of the outcome, mediators, and exposures in advance, when
+doing so is appropriate. In addition, most functions in our package
+assume that the outcome variable is continuous; however, HIMA and HDMA
+have options for fitting a binary outcome model with a standard logistic
+link.
 
 ## Example
 
@@ -168,3 +181,15 @@ hima_out$effects
 #> 2   direct  0.01018211
 #> 3    total -0.15516169
 ```
+
+## Citation
+
+This package serves as companion code for our paper, “Methods for
+Mediation Analysis with High-Dimensional DNA Methylation Data: Possible
+Choices and Comparison.” To give our work proper credit, use the
+citation provided below:
+
+Dylan Clark-Boucher, Xiang Zhou, Jiacong Du, Yongmei Liu, Belinda L
+Needham, Jennifer A Smith, Bhramar Mukherjee (2023). Methods for
+Mediation Analysis with High-Dimensional DNA Methylation Data: Possible
+Choices and Comparison. medRxiv 2023.02.10.23285764
