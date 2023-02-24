@@ -11,12 +11,14 @@ There was 1 NOTE:
 * Possibly mis-spelled words in DESCRIPTION:
 
   None of these words are misspelled - they are either Latin abbreviations
-  (e.g., "et al.") or acronyms, all of which are defined in the DESCRIPTION
-  file text
+  (e.g., "et al.") or acronyms, all of which are defined in the DESCRIPTION file text
   
-* Initial CRAN submission note
-
-  This is our first submission
-
 ## Downstream dependencies
 There are no downstream dependencies of this package
+
+## Resubmission
+This is a resubmission. In this version, I have:
+
+* Replaced a call to citEntry() in the CITATION file to bibentry()
+
+* Removed a call to personList() in the CITATION
