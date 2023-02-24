@@ -12,7 +12,7 @@ citEntry(
                    as.person("Bhramar Mukherjee")),
   journal  = "medRxiv",
   year     = "2023",
-  url      = "https://www.medrxiv.org/content/early/2023/02/14/2023.02.10.23285764",
+  url      = "https://www.medrxiv.org/content/10.1101/2023.02.10.23285764v1",
   doi = "10.1101/2023.02.10.23285764",
   textVersion =
   paste(
