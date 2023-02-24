@@ -89,5 +89,5 @@ table(out$EBIC_out$mediator_active)
 }
 \references{
 Derkach, A., Pfeiffer, R. M., Chen, T.-H. & Sampson, J. N. High dimensional
-mediation analysis with latent variables. Biometrics 75, 745–756 (2019).
+mediation analysis with latent variables. Biometrics 75, 745-756 (2019).
 }

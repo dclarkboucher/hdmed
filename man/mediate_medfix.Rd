@@ -90,5 +90,5 @@ head(out$contributions)
 }
 \references{
 Zhang, Q. High-Dimensional Mediation Analysis with Applications to Causal
-Gene Identification. Statistics in biosciences (2021)
+Gene Identification. Stat. Biosci. 14, 432-451 (2021).
 }

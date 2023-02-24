@@ -70,5 +70,5 @@ out$a1
 \references{
 Zhou, R. R., Wang, L. & Zhao, S. D. Estimation and inference for
 the indirect effect in high-dimensional linear mediation models. Biometrika
-107, 573–589 (2020).
+107, 573-589 (2020)
 }

@@ -89,5 +89,5 @@ Gao, Y. et al. Testing Mediation Effects in High-Dimensional
 Epigenetic Studies. Front. Genet. 10, 1195 (2019).
 
 Fan, J. & Lv, J. Sure independence screening for ultrahigh dimensional
-feature space. J. R. Stat. Soc. 70, 849–911 (2008).
+feature space. J. R. Stat. Soc. 70, 849-911 (2008)
 }

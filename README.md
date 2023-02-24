@@ -88,8 +88,8 @@ least, estimates of the direct effect, global mediation effect, and
 total effect, making them suitable for performing mediation analysis
 with the standard assumptions. Moreover, in the case of BSLMM
 (`mediate_bslmm`), HIMA (`mediate_hima`), HDMA (`mediate_hdma`), MedFix
-(`mediate_medfix`), and Pathaway LASSO (`mediate_pathway_lasso`), we
-also report estimates of the **mediation contributions**, which are the
+(`mediate_medfix`), and Pathway LASSO (`mediate_pathway_lasso`), we also
+report estimates of the **mediation contributions**, which are the
 contributions $(\mathbf{\alpha_a})_j(\mathbf{\beta_m})_j$ of each
 mediator to $\mathbf{\alpha_a}^T \mathbf{\beta_m}$, $j$ from $1$ to $p$.
 Though useful for identifying potentially important mediators, we stress

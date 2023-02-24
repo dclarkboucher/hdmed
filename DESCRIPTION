@@ -21,7 +21,7 @@ Description: A suite of functions for performing mediation
     described in detail by both our companion manuscript---"Methods for 
     Mediation Analysis with High-Dimensional DNA Methylation Data: Possible 
     Choices and Comparison"---and the original publications that proposed them. 
-    The specifc methods offered by our package include the Bayesian sparse 
+    The specific methods offered by our package include the Bayesian sparse 
     linear mixed model (BSLMM) by Song et al. (2019); high-dimensional mediation
     analysis (HDMA) by Gao et al. (2019); high-dimensional multivariate 
     mediation (HDMM) by Chén et al. (2018); high-dimensional linear mediation 

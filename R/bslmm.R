@@ -52,8 +52,9 @@
 #'
 #' @importFrom bama bama
 #'
+#'
 #' @references Song, Y. et al. Bayesian shrinkage estimation of high dimensional
-#' causal mediation effects in omics studies. Biometrics 76, 700–710 (2020).
+#' causal mediation effects in omics studies. Biometrics 76, 700-710 (2020).
 #'
 #' @examples
 #' A <- med_dat$A

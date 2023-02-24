@@ -54,7 +54,7 @@
 #' Epigenetic Studies. Front. Genet. 10, 1195 (2019).
 #'
 #' Fan, J. & Lv, J. Sure independence screening for ultrahigh dimensional
-#' feature space. J. R. Stat. Soc. 70, 849–911 (2008).
+#' feature space. J. R. Stat. Soc. 70, 849-911 (2008)
 #'
 #' @source \url{https://github.com/YuzhaoGao/High-dimensional-mediation-analysis-R}
 #'

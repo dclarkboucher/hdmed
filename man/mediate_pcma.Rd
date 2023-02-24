@@ -89,5 +89,5 @@ out$effects
 \references{
 Huang, Y.-T. & Pan, W.-C. Hypothesis test of mediation effect in
 causal mediation model with  high-dimensional continuous mediators.
-Biometrics 72, 402–413 (2016).
+Biometrics 72, 402-413 (2016).
 }

@@ -100,8 +100,8 @@ head(out$all_fits$lambda2)
 }
 \references{
 Zhao, Y. & Luo, X. Pathway LASSO: pathway estimation and
-selection with high-dimensional mediators. Stat. Interface 15, 39–50 (2022).
+selection with high-dimensional mediators. Stat. Interface 15, 39-50 (2022).
 
 Sun, W., Wang, J. & Fang, Y. Consistent selection of tuning parameters via
-variable selection stability. J. Mach. Learn. Res. 14, 3419–3440 (2013).
+variable selection stability. J. Mach. Learn. Res. 14, 3419-3440 (2013).
 }
