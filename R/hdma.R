@@ -71,7 +71,7 @@
 #' @export
 #'
 
-mediate_hdma <- function(A, M, Y, C1 = NULL, C2 = NULL, binary_y = F,
+mediate_hdma <- function(A, M, Y, C1 = NULL, C2 = NULL, binary_y = FALSE,
                          n_include = NULL,
                          ...){
 

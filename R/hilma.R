@@ -55,8 +55,8 @@
 #'
 #' @export
 #'
-mediate_hilma <- function(A, M, Y, aic_tuning = F, nlambda = 5,
-                          lambda_minmax_ratio = 0.1, center = T){
+mediate_hilma <- function(A, M, Y, aic_tuning = FALSE, nlambda = 5,
+                          lambda_minmax_ratio = 0.1, center = TRUE){
 
   n <- nrow(M)
   p <- ncol(M)

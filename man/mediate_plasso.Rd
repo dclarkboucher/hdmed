@@ -12,7 +12,7 @@ mediate_plasso(
   M,
   Y,
   lambdas = NULL,
-  select_lambda = F,
+  select_lambda = FALSE,
   vss_rep = 5,
   vss_cutoff = 0.1,
   omega_ratio = 1,

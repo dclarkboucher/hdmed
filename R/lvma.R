@@ -77,7 +77,8 @@
 #' @export
 #'
 
-mediate_lvma <- function(A, M, Y, q, rhoLM, rhoEL, rhoLY, scale = T, imax = 5000){
+mediate_lvma <- function(A, M, Y, q, rhoLM, rhoEL, rhoLY,
+                         scale = TRUE, imax = 5000){
 
   n <- nrow(M)
   p <- ncol(M)

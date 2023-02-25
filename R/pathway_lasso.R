@@ -79,7 +79,7 @@
 #' @export
 
 
-mediate_plasso <- function(A, M, Y, lambdas = NULL, select_lambda = F,
+mediate_plasso <- function(A, M, Y, lambdas = NULL, select_lambda = FALSE,
                            vss_rep = 5,vss_cutoff = 0.1, omega_ratio = 1,
                            phi = 2, maxit = 5000, tol = 1e-6){
 

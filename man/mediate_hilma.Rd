@@ -8,10 +8,10 @@ mediate_hilma(
   A,
   M,
   Y,
-  aic_tuning = F,
+  aic_tuning = FALSE,
   nlambda = 5,
   lambda_minmax_ratio = 0.1,
-  center = T
+  center = TRUE
 )
 }
 \arguments{

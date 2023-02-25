@@ -13,7 +13,7 @@ mediate_hdma(
   Y,
   C1 = NULL,
   C2 = NULL,
-  binary_y = F,
+  binary_y = FALSE,
   n_include = NULL,
   ...
 )

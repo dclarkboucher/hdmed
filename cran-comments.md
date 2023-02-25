@@ -19,6 +19,4 @@ There are no downstream dependencies of this package
 ## Resubmission
 This is a resubmission. In this version, I have:
 
-* Replaced a call to citEntry() in the CITATION file to bibentry()
-
-* Removed a call to personList() in the CITATION
+* Replaced "T" and "F" with "TRUE" and "FALSE" in the default values of exported functions

@@ -7,7 +7,7 @@
 \url{https://pubmed.ncbi.nlm.nih.gov/30859548/}
 }
 \usage{
-mediate_lvma(A, M, Y, q, rhoLM, rhoEL, rhoLY, scale = T, imax = 5000)
+mediate_lvma(A, M, Y, q, rhoLM, rhoEL, rhoLY, scale = TRUE, imax = 5000)
 }
 \arguments{
 \item{A}{length \code{n} numeric vector representing the exposure variable}
