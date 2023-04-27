@@ -171,7 +171,7 @@ table, which includes the indirect effect (the global mediation effect),
 the direct effect, and the total effect. In theory, one can use these
 estimates to report the proportion mediated, as described above, but
 since the proportion mediated is generally only useful when
-$\mathbf{\alpha_a}^T \mathbf{\beta_m}$ and $beta_m$ have the same sign,
+$\mathbf{\alpha_a}^T \mathbf{\beta_m}$ and $\beta_m$ have the same sign,
 we will not do so here.
 
 ``` r
