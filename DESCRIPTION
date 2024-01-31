@@ -1,6 +1,6 @@
 Package: hdmed
 Title: Methods for Mediation Analysis with High-Dimensional Mediators
-Version: 1.0.0
+Version: 1.0.1
 Authors@R:
     c(person(given = "Dylan",
            family = "Clark-Boucher",

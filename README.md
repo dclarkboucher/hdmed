@@ -186,10 +186,10 @@ hima_out$effects
 
 This package serves as companion code for our paper, “Methods for
 Mediation Analysis with High-Dimensional DNA Methylation Data: Possible
-Choices and Comparison.” To give our work proper credit, use the
+Choices and Comparison.” To give our work proper credit, please use the
 citation provided below:
 
-> Dylan Clark-Boucher, Xiang Zhou, Jiacong Du, Yongmei Liu, Belinda L
-> Needham, Jennifer A Smith, Bhramar Mukherjee (2023). Methods for
-> Mediation Analysis with High-Dimensional DNA Methylation Data:
-> Possible Choices and Comparison. medRxiv 2023.02.10.23285764
+> Clark-Boucher D, Zhou X, Du J, Liu Y, Needham BL, Smith JA, et
+> al. Methods for mediation analysis with high-dimensional DNA
+> methylation data: Possible choices and comparisons. PLOS Genetics.
+> 2023 Nov;19(11):1–26.

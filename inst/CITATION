@@ -3,8 +3,11 @@ bibentry(
   title = "Methods for Mediation Analysis with High-Dimensional DNA Methylation Data: Possible Choices and Comparison",
   author   = "Dylan Clark-Boucher, Xiang Zhou, Jiacong Du, Yongmei Liu, Belinda L Needham, Jennifer A Smith, Bhramar Mukherjee",
   year = 2023,
-  journal = "medRxiv",
-  url = "https://www.medrxiv.org/content/10.1101/2023.02.10.23285764v1",
-  doi = "10.1101/2023.02.10.23285764"
+  journal = "PLOS Genetics",
+  volume = "19",
+  issue = "11",
+  pages = "1-26",
+  url = "https://doi.org/10.1371/journal.pgen.1011022",
+  doi = "10.1371/journal.pgen.1011022"
 
 )
