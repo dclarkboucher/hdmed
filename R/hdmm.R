@@ -42,14 +42,15 @@
 #'
 #'
 #' @return A list containing:
-#' \itemize{
-#'     \item{pdm: }{the first direction of mediation by which mediators are
-#'     weighted.}
-#'     \item{mediator: }{the latent mediator corresponding to the first direction
-#'     of mediation.}
-#'     \item{effects: }{a data frame containing the estimates, confidence
-#'     intervals, and p-values of the mediation effects.}
-#' }
+#'
+#' * `pdm`: the first direction of mediation by which mediators are
+#'     weighted.
+#'
+#' * `mediator`: the latent mediator corresponding to the first direction
+#'     of mediation.
+#'
+#' * `effects`: a data frame containing the estimates, confidence
+#'     intervals, and p-values of the mediation effects.
 #'
 #' @import utils
 #' @import stats

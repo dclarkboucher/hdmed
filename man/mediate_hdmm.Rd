@@ -62,12 +62,12 @@ Default is 100.}
 \value{
 A list containing:
 \itemize{
-\item{pdm: }{the first direction of mediation by which mediators are
-weighted.}
-\item{mediator: }{the latent mediator corresponding to the first direction
-of mediation.}
-\item{effects: }{a data frame containing the estimates, confidence
-intervals, and p-values of the mediation effects.}
+\item \code{pdm}: the first direction of mediation by which mediators are
+weighted.
+\item \code{mediator}: the latent mediator corresponding to the first direction
+of mediation.
+\item \code{effects}: a data frame containing the estimates, confidence
+intervals, and p-values of the mediation effects.
 }
 }
 \description{

@@ -55,11 +55,11 @@ Default is 2. Cannot be less than 1/2.}
 \value{
 A list containing:
 \itemize{
-\item{lambdas: }{the \code{lambda}s attempted in the same order as the objects in \code{all_fits}.}
-\item{all_fits: }{a list containing, for each \code{lambda}, a \code{data.frame} of the estimated mediation effects.}
-\item{chosen_lambda: }{if \code{select_lambda} is \code{TRUE}, the \code{lambda} chosen by VSSC.}
-\item{chosen_fit: }{if \code{select_lambda} is \code{TRUE}, the fit corresponding to the chosen \code{lambda}.}
-\item{vss: }{if \code{select_lambda} is\code{TRUE}, a \code{data.frame} containing the variable selection stabilities.}
+\item \code{lambdas}: the \code{lambda}s attempted in the same order as the objects in \code{all_fits}.
+\item \code{all_fits}: a list containing, for each \code{lambda}, a \code{data.frame} of the estimated mediation effects.
+\item \code{chosen_lambda}: if \code{select_lambda} is \code{TRUE}, the \code{lambda} chosen by VSSC.
+\item \code{chosen_fit}: if \code{select_lambda} is \code{TRUE}, the fit corresponding to the chosen \code{lambda}.
+\item \code{vss}: if \code{select_lambda} is\code{TRUE}, a \code{data.frame} containing the variable selection stabilities.
 }
 }
 \description{

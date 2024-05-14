@@ -42,13 +42,13 @@
 #' distributions is reported for each mediator as \code{ab_pip}.
 #'
 #' @return A list containing:
-#' \itemize{
-#'     \item{contributions: }{a data frame containing the estimates, Bayesian
-#'     credible intervals, and posterior inclusion probabilities of the
-#'     mediation contributions.}
-#'     \item{effects: }{a data frame containing the estimated direct, global
-#'     mediation, and total effects}
-#' }
+#'
+#' * `contributions`: a data frame containing the estimates, Bayesian credible
+#' intervals, and posterior inclusion probabilities of the mediation contributions
+#'
+#' * `effects`: a data frame containing the estimated direct, global mediation,
+#' and total effects.
+#'
 #'
 #' @importFrom bama bama
 #'

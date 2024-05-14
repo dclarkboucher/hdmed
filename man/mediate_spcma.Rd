@@ -76,13 +76,13 @@ is 2000.}
 \value{
 A list containing:
 \itemize{
-\item{loadings: }{a matrix of the sparse PC loadings.}
-\item{pcs: }{a matrix of the PCs.}
-\item{var_explained: the cumulative proportion of variance explained by the PCs.}
-\item{contributions: }{a data frame containing the estimates, confidence
-intervals, and p-values of the mediation contributions.}
-\item{effects: }{a data frame containing the estimated direct, global
-mediation, and total effects}
+\item \code{loadings}: a matrix of the PC loadings.
+\item \code{pcs}: a matrix of the PCs.
+\item \code{var_explained}: the cumulative proportion of variance explained by the PCs.
+\item \code{contributions}: a data frame containing the estimates, confidence
+intervals, and p-values of the mediation contributions.
+\item \code{effects}: a data frame containing the estimated direct, global
+mediation, and total effects.
 }
 }
 \description{

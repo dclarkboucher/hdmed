@@ -43,10 +43,10 @@ the mediator model p-values.}
 \value{
 A list containing:
 \itemize{
-\item{contributions: }{a data frame containing the estimates and p-values
-of the mediation contributions}
-\item{effects: }{a data frame containing the estimated direct, global
-mediation, and total effects}
+\item \code{contributions}: a data frame containing the estimates and p-values
+of the mediation contributions.
+\item \code{effects}: a data frame containing the estimated direct, global
+mediation, and total effects.
 }
 }
 \description{

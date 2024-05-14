@@ -49,12 +49,13 @@
 #' @importFrom gcdnet gcdnet cv.gcdnet
 #'
 #' @return A list containing:
-#' \itemize{
-#'     \item{contributions: }{a data frame containing the estimates and p-values
-#'     of the mediation contributions}
-#'     \item{effects: }{a data frame containing the estimated direct, global
-#'     mediation, and total effects}
-#' }
+#'
+#' * `contributions`: a data frame containing the estimates and p-values of the
+#' mediation contributions.
+#'
+#' * `effects`: a data frame containing the estimated direct, global
+#' mediation, and total effects.
+#'
 #'
 #' @references
 #' Zhang, Q. High-Dimensional Mediation Analysis with Applications to Causal

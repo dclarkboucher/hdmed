@@ -35,15 +35,20 @@
 #'
 #'
 #' @return A list containing:
-#' \itemize{
-#'     \item{loadings: }{a matrix of the PC loadings.}
-#'     \item{pcs: }{a matrix of the PCs.}
-#'     \item{var_explained: the cumulative proportion of variance explained by the PCs.}
-#'     \item{contributions: }{a data frame containing the estimates, confidence
-#'     intervals, and p-values of the mediation contributions.}
-#'     \item{effects: }{a data frame containing the estimated direct, global
-#'     mediation, and total effects}
-#' }
+#'
+#'
+#' * `loadings`: a matrix of the PC loadings.
+#'
+#' * `pcs`: a matrix of the PCs.
+#'
+#' * `var_explained`: the cumulative proportion of variance explained by the PCs.
+#'
+#' * `contributions`: a data frame containing the estimates, confidence
+#'     intervals, and p-values of the mediation contributions.
+#'
+#' * `effects`: a data frame containing the estimated direct, global
+#'     mediation, and total effects.
+#'
 #'
 #'
 #'

@@ -46,13 +46,16 @@
 #' many times.
 #'
 #' @return A list containing:
-#' \itemize{
-#'     \item{lambdas: }{the \code{lambda}s attempted in the same order as the objects in \code{all_fits}.}
-#'     \item{all_fits: }{a list containing, for each \code{lambda}, a \code{data.frame} of the estimated mediation effects.}
-#'     \item{chosen_lambda: }{if \code{select_lambda} is \code{TRUE}, the \code{lambda} chosen by VSSC.}
-#'     \item{chosen_fit: }{if \code{select_lambda} is \code{TRUE}, the fit corresponding to the chosen \code{lambda}.}
-#'     \item{vss: }{if \code{select_lambda} is\code{TRUE}, a \code{data.frame} containing the variable selection stabilities.}
-#' }
+#'
+#' * `lambdas`: the \code{lambda}s attempted in the same order as the objects in \code{all_fits}.
+#'
+#' * `all_fits`: a list containing, for each \code{lambda}, a \code{data.frame} of the estimated mediation effects.
+#'
+#' * `chosen_lambda`: if \code{select_lambda} is \code{TRUE}, the \code{lambda} chosen by VSSC.
+#'
+#' * `chosen_fit`: if \code{select_lambda} is \code{TRUE}, the fit corresponding to the chosen \code{lambda}.
+#'
+#' * `vss`: if \code{select_lambda} is\code{TRUE}, a \code{data.frame} containing the variable selection stabilities.
 #'
 #'
 #' @import MASS

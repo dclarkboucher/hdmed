@@ -38,12 +38,12 @@
 #' more detail.
 #'
 #' @return A list containing:
-#' \itemize{
-#'     \item{contributions: }{a data frame containing the estimates and p-values
-#'     of the mediation contributions}
-#'     \item{effects: }{a data frame containing the estimated direct, global
-#'     mediation, and total effects}
-#' }
+#'
+#' * `contributions`: a data frame containing the estimates and p-values
+#' of the mediation contributions.
+#'
+#' * `effects`: a data frame containing the estimated direct, global mediation,
+#' and total effects.
 #'
 #' @import hdi
 #' @import foreach

@@ -46,12 +46,12 @@
 #' more information, see the "HIMA" R package along with the provided reference.
 #'
 #' @return A list containing:
-#' \itemize{
-#'     \item{contributions: }{a data frame containing the estimates and p-values
-#'     of the mediation contributions}
-#'     \item{effects: }{a data frame containing the estimated direct, global
-#'     mediation, and total effects}
-#' }
+#'
+#' * `contributions`: a data frame containing the estimates and p-values
+#'     of the mediation contributions.
+#'
+#' * `effects`: a data frame containing the estimated direct, global
+#'     mediation, and total effects.
 #'
 #' @import ncvreg
 #' @import iterators
