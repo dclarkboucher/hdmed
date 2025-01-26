@@ -28,10 +28,11 @@ mediate_bslmm(
 
 \item{Y}{length \code{n} numeric vector containing continuous outcome variable.}
 
-\item{C1}{optional numeric matrix of covariates to include in the outcome model.}
+\item{C1}{optional numeric matrix of covariates to include in the outcome model. Do
+not include an intercept term.}
 
 \item{C2}{optional numeric matrix of covariates to include in the mediator
-model. Default is \code{C1}.}
+model. Default is \code{C1}. Do not include an intercept term.}
 
 \item{burnin}{number of MCMC draws prior to sampling.}
 

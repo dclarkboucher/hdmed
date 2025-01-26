@@ -24,10 +24,10 @@ mediate_medfix(
 \item{Y}{length \code{n} numeric vector representing the continuous outcome variable.}
 
 \item{C1}{optional numeric matrix of covariates to include in the outcome model.
-Default is \code{NULL}.}
+Default is \code{NULL}. Do not include an intercept term.}
 
 \item{C2}{optional numeric matrix of covariates to include in the mediator
-model. Default is \code{C1}.}
+model. Default is \code{C1}. Do not include an intercept term.}
 
 \item{nlambda}{number of lambdas attempted in the adaptive LASSO.
 See \code{\link[gcdnet:cv.gcdnet]{gcdnet::cv.gcdnet()}}. The specific sequence of \code{lambda}s is chosen

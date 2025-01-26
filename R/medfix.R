@@ -9,9 +9,9 @@
 #' @param M \code{n x p} numeric matrix of high-dimensional mediators.
 #' @param Y length \code{n} numeric vector representing the continuous outcome variable.
 #' @param C1 optional numeric matrix of covariates to include in the outcome model.
-#' Default is \code{NULL}.
+#' Default is \code{NULL}. Do not include an intercept term.
 #' @param C2 optional numeric matrix of covariates to include in the mediator
-#' model. Default is \code{C1}.
+#' model. Default is \code{C1}. Do not include an intercept term.
 #' @param nlambda number of lambdas attempted in the adaptive LASSO.
 #' See [gcdnet::cv.gcdnet()]. The specific sequence of \code{lambda}s is chosen
 #' by the \code{cv.gcdnet()} function.

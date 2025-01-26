@@ -8,9 +8,10 @@
 #' @param A length \code{n} numeric vector containing exposure variable
 #' @param M \code{n x p} numeric matrix of high-dimensional mediators.
 #' @param Y length \code{n} numeric vector containing continuous outcome variable.
-#' @param C1 optional numeric matrix of covariates to include in the outcome model.
+#' @param C1 optional numeric matrix of covariates to include in the outcome model. Do
+#' not include an intercept term.
 #' @param C2 optional numeric matrix of covariates to include in the mediator
-#' model. Default is \code{C1}.
+#' model. Default is \code{C1}. Do not include an intercept term.
 #' @param burnin number of MCMC draws prior to sampling.
 #' @param ndraws number of MCMC draws after burn-in.
 #' @param ci_level the desired credible interval level. Default is 0.95.
@@ -92,6 +93,9 @@ mediate_bslmm <- function(A, M, Y, C1 = NULL, C2 = C1, burnin = 30000, ndraws = 
     }
 
     C1 <- as.data.frame(C1)
+    int <- data.frame(int = rep(1,n))
+    C1 <- cbind(int, C1)
+
   }
 
   if(!is.null(C2)){
@@ -100,6 +104,8 @@ mediate_bslmm <- function(A, M, Y, C1 = NULL, C2 = C1, burnin = 30000, ndraws = 
     }
 
     C2 <- as.data.frame(C2)
+    int <- data.frame(int = rep(1,n))
+    C2 <- cbind(int, C2)
   }
 
   if(ci_level >= 1 | ci_level <= 0){

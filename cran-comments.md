@@ -1,7 +1,7 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Corrected Latex errors which resulted from using "item" inside "itemize"
+* Additional corrections to Latex errors which resulted from using "item" inside "itemize"
 
 ## Test Enviroments
 * Local Windows install, R 4.3.2

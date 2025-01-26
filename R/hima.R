@@ -7,8 +7,10 @@
 #' @param A length \code{n} numeric vector containing exposure variable
 #' @param M \code{n x p} numeric matrix of high-dimensional mediators.
 #' @param Y length \code{n} numeric vector containing continuous or binary outcome variable.
-#' @param C1 optional numeric matrix of covariates to include in the outcome model.
-#' @param C2 optional numeric matrix of covariates to include in the mediator model.
+#' @param C1 optional numeric matrix of covariates to include in the outcome model. Do not include an
+#' intercept term.
+#' @param C2 optional numeric matrix of covariates to include in the mediator model. Do not include an
+#' intercept term.
 #' @param binary_y logical flag for whether \code{Y} should be interpreted as a
 #' binary variable with 1/0 coding rather than as continuous. Default is \code{FALSE}.
 #' @param n_include integer specifying the number of top markers from sure
@@ -52,6 +54,9 @@
 #'
 #' * `effects`: a data frame containing the estimated direct, global
 #'     mediation, and total effects.
+#'
+#' * `covariate_outcome_coefficients`: a data frame containing the intercept and
+#'     covariate coefficients from the outcome model.
 #'
 #' @import ncvreg
 #' @import iterators
@@ -137,6 +142,8 @@ mediate_hima <- function(A, M, Y, C1 = NULL, C2 = NULL, binary_y = FALSE,
   hima_out <- hima(A, Y, M, COV.XM = C2, COV.MY = C1, Y.family = family,
                    M.family = "gaussian", penalty = "MCP", ...)
 
+  covariate_results <- hima_out$covariates
+  hima_out <- hima_out$results
   if(nrow(hima_out) == 0) return(NULL)
 
   #Organize mediation contributions
@@ -155,7 +162,8 @@ mediate_hima <- function(A, M, Y, C1 = NULL, C2 = NULL, binary_y = FALSE,
   output <-
     list(
       contributions = contributions,
-      effects = effects
+      effects = effects,
+      covariates_outome_coefficients = covariate_results
     )
 
   return(output)

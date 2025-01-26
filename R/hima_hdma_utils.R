@@ -119,11 +119,31 @@ hima <- function(X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
     YMX <- data.frame(Y = Y, M[, ID_test, drop = FALSE], X = X, COV.MY)
   }
 
+  len_idt <- length(ID_test)
   res <- summary(glm(Y ~ ., family = Y.family, data = YMX))$coefficients
-  est <- res[2:(length(ID_test) + 1), 1]  # the estimator for beta
-  P_beta <- res[2:(length(ID_test) + 1), 4]
+  est <- res[2:(len_idt+ 1), 1]  # the estimator for beta
+  P_beta <- res[2:(len_idt + 1), 4]
   ab_est <- alpha_est * beta_est
 
+  # Extract intercept (and possibly covariate effects)
+
+  covar_indices <- seq_len(nrow(res))[-(1 + seq_len(len_idt+1))]
+  covariate_effects <- res[covar_indices,1]
+  covariate_pvals <- res[covar_indices,4]
+
+  if (!is.null(COV.MY)){
+    covariate_names <- c("intercept", colnames(COV.MY))
+  } else {
+    covariate_names <- "intercept"
+  }
+  print(res)
+  covariate_dat <-
+    data.frame(
+      variable = covariate_names,
+      effect = covariate_effects,
+      pv = covariate_pvals
+    )
+  rownames(covariate_dat) <- NULL
   ## Use the maximum value as p value
   P_value <- pmax(P_beta, P_alpha)
 
@@ -148,8 +168,13 @@ hima <- function(X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
       te = gamma_est,
       row.names = NULL
     )
+  out <-
+    list(
+      results = results,
+      covariates = covariate_dat
+    )
 
-  return(results)
+  out
 
 }
 
@@ -167,7 +192,8 @@ hdma <- function (X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
   } else {
     d <- topN      # the number of top mediators that associated with independent variable (X)
   }
-  d <- min(p, d)   # if d > p select all mediators
+  d <- min(p, d)   # if d >= p select all mediators
+
 
 
   #Step 1: SIS
@@ -210,7 +236,7 @@ hdma <- function (X, Y, M, COV.XM = NULL, COV.MY = COV.XM,
       if (method == "lasso") fit <- lasso.proj(XM_COV, Y, family = family) else fit <- ridge.proj(XM_COV, Y, family = family)
     )
 
-    }
+  }
   P_hdi <- fit$pval[1:length(ID)]
   index <- which(P_hdi<=0.05)
 

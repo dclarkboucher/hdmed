@@ -22,9 +22,11 @@ mediate_hima(
 
 \item{Y}{length \code{n} numeric vector containing continuous or binary outcome variable.}
 
-\item{C1}{optional numeric matrix of covariates to include in the outcome model.}
+\item{C1}{optional numeric matrix of covariates to include in the outcome model. Do not include an
+intercept term.}
 
-\item{C2}{optional numeric matrix of covariates to include in the mediator model.}
+\item{C2}{optional numeric matrix of covariates to include in the mediator model. Do not include an
+intercept term.}
 
 \item{binary_y}{logical flag for whether \code{Y} should be interpreted as a
 binary variable with 1/0 coding rather than as continuous. Default is \code{FALSE}.}
@@ -47,6 +49,8 @@ A list containing:
 of the mediation contributions.
 \item \code{effects}: a data frame containing the estimated direct, global
 mediation, and total effects.
+\item \code{covariate_outcome_coefficients}: a data frame containing the intercept and
+covariate coefficients from the outcome model.
 }
 }
 \description{
