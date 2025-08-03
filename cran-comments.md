@@ -1,7 +1,8 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Additional corrections to Latex errors which resulted from using "item" inside "itemize"
+* Corrected references to external packages in ROxygen2
+* Updated DESCRIPTION file to require R >= 4.1.0
 
 ## Test Enviroments
 * Local Windows install, R 4.3.2

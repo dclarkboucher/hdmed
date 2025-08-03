@@ -40,7 +40,7 @@ that if \code{binary_y = F}, screening is performed based on the single-mediator
 outcome model p-values, and if \code{binary_y = F}, screening is based on the
 the mediator model p-values.}
 
-\item{...}{other arguments passed to \code{\link{hdi}}.}
+\item{...}{other arguments passed to \code{\link[hdi:hdi]{hdi::hdi()}}.}
 }
 \value{
 A list containing:

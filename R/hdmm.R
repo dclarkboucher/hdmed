@@ -10,7 +10,7 @@
 #' to supply a matrix with more mediators than observations.
 #' @param Y numeric vector containing continuous outcome variable.
 #' @param sims number of Monte Carlo draws for nonparametric bootstrap or
-#' quasi-Bayesian approximation. See \code{\link{mediate}}. Default is 1000.
+#' quasi-Bayesian approximation. See [mediation::mediate()]. Default is 1000.
 #' @param boot_ci_type 	a character string indicating the type of bootstrap
 #' confidence intervals for when \code{boot = TRUE}. If \code{"bca"},
 #' bias-corrected and accelerated (BCa) confidence intervals will be estimated.

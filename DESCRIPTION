@@ -1,6 +1,6 @@
 Package: hdmed
 Title: Methods for Mediation Analysis with High-Dimensional Mediators
-Version: 1.0.1
+Version: 1.0.2
 Authors@R:
     c(person(given = "Dylan",
            family = "Clark-Boucher",
@@ -35,9 +35,9 @@ Description: A suite of functions for performing mediation
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Depends: 
-    R (>= 2.10)
+    R (>= 4.1.0)
 LazyData: true
 Imports: 
     bama (>= 1.3.0),

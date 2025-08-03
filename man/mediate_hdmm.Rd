@@ -32,7 +32,7 @@ to supply a matrix with more mediators than observations.}
 \item{Y}{numeric vector containing continuous outcome variable.}
 
 \item{sims}{number of Monte Carlo draws for nonparametric bootstrap or
-quasi-Bayesian approximation. See \code{\link{mediate}}. Default is 1000.}
+quasi-Bayesian approximation. See \code{\link[mediation:mediate]{mediation::mediate()}}. Default is 1000.}
 
 \item{boot_ci_type}{a character string indicating the type of bootstrap
 confidence intervals for when \code{boot = TRUE}. If \code{"bca"},

@@ -21,7 +21,7 @@
 #' that if \code{binary_y = F}, screening is performed based on the single-mediator
 #' outcome model p-values, and if \code{binary_y = F}, screening is based on the
 #' the mediator model p-values.
-#' @param ... other arguments passed to \code{\link{hdi}}.
+#' @param ... other arguments passed to [hdi::hdi()].
 #'
 #'
 #' @details The first step in HIMA is to perform sure independence
